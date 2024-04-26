@@ -1,1 +1,24 @@
-<mat-slide-toggle>Toggle me!</mat-slide-toggle>
+<mat-card>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Login</mat-label>
+        <input matInput type="text" ngModel name="username" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" ngModel name="password" required>
+      </mat-form-field>
+
+      <div class="login-register-button-group">
+        <button mat-raised-button color="primary" type="submit">Zaloguj się</button>
+        <button mat-raised-button color="accent" type="submit">Zarejestruj się</button>
+      </div>
+
+      <mat-error *ngIf="!loginValid">
+        The username and password were not recognized
+      </mat-error>
+    </form>
+  </mat-card-content>
+</mat-card>
