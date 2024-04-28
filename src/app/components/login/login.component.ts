@@ -39,11 +39,22 @@ export class LoginComponent {
 
   constructor(private api: DefaultService, private router: Router) {}
 
+  ngOnInit(): void {
+    if (sessionStorage.getItem('username')) {
+      this.router.navigate(['']).then(() => console.log('User is already logged in, navigating to main panel'));
+    }
+  }
+
   public onSubmit(): void {
     this.api.checkUserCredentials({username: this.username,
       password: this.password}).subscribe({
       next: response => {
         this.loginValid = response.token === null;
+        sessionStorage.setItem('username', this.username);
+        sessionStorage.setItem('privilegeLevel', "user");
+        sessionStorage.setItem('token', <string> response.token);
+        sessionStorage.setItem('token', <string> response.refreshToken);
+
         this.router.navigate(['']).then( () => console.log('User successfully logged in, navigating to main panel'));
       },
       error: error => {

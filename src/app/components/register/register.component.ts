@@ -40,10 +40,16 @@ export class RegisterComponent {
   constructor(private api: DefaultService, private router: Router) {
   }
 
+  ngOnInit(): void {
+    if (sessionStorage.getItem('username')) {
+      this.router.navigate(['']).then(() => console.log('User is already logged in, navigating to main panel'));
+    }
+  }
+
   public registerUser(): void {
     this.api.createUser({username: this.username, password: this.password,
     email: this.email}).subscribe({
-      next: response => {
+      next: () => {
         this.router.navigate(['login']).then(() => console.log('Successfully registered user, navigating to login panel'));
       },
       error: error => {
