@@ -53,7 +53,7 @@ export class LoginComponent {
         sessionStorage.setItem('username', this.username);
         sessionStorage.setItem('privilegeLevel', "user");
         sessionStorage.setItem('token', <string> response.token);
-        sessionStorage.setItem('token', <string> response.refreshToken);
+        sessionStorage.setItem('refreshToken', <string> response.refreshToken);
 
         this.router.navigate(['']).then( () => console.log('User successfully logged in, navigating to main panel'));
       },
