@@ -1,1 +1,38 @@
-<p>register works!</p>
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="registerUser()">
+      <mat-form-field appearance="fill">
+        <mat-label>Login</mat-label>
+        <input matInput type="text" [(ngModel)]="username" name="username" #templateUsername="ngModel" required pattern=".{8,32}">
+        <mat-error *ngIf="templateUsername.invalid && templateUsername.touched">
+          Login musi mieć od 8 do 32 znaków.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" [(ngModel)]="password" name="password" #templatePassword="ngModel" required pattern=".{8,32}">
+        <mat-error *ngIf="templatePassword.invalid && templatePassword.touched">
+          Hasło musi mieć od 8 do 32 znaków.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Adres email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" name="email" #templateMail="ngModel" required email>
+        <mat-error *ngIf="templateMail.invalid && templateMail.touched">
+          Proszę wprowadzić poprawny adres email.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error *ngIf="errorMessage">
+        {{ errorMessage }}
+      </mat-error>
+
+      <div class="login-register-button-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Zarejestruj się</button>
+        <button mat-raised-button color="accent" type="submit" routerLink="/login">Powrót do strony logowania</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -16,3 +16,9 @@ mat-form-field {
   gap: 10px;
   align-items: center;
 }
+
+.center-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

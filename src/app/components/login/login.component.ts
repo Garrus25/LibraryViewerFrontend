@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
@@ -6,7 +6,8 @@ import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {DefaultService} from "../../openapi";
 
 @Component({
   selector: 'app-login',
@@ -28,11 +29,28 @@ import {RouterLink} from "@angular/router";
   styleUrl: './login.component.css'
 })
 
+@Injectable({
+  providedIn: 'root',
+})
 export class LoginComponent {
-  public loginValid = true;
+   public loginValid = true;
+   public username: string = "";
+   public password: string = "";
+
+  constructor(private api: DefaultService, private router: Router) {}
 
   public onSubmit(): void {
-    console.log('Form submitted');
+    this.api.checkUserCredentials({username: this.username,
+      password: this.password}).subscribe({
+      next: response => {
+        this.loginValid = response.token === null;
+        this.router.navigate(['']).then(r => console.log('User successfully logged in, navigating to main panel'));
+      },
+      error: error => {
+        console.error('Error during checking user credentials:', error);
+        this.loginValid = false;
+      }
+    });
   }
 
 }
