@@ -44,7 +44,7 @@ export class LoginComponent {
       password: this.password}).subscribe({
       next: response => {
         this.loginValid = response.token === null;
-        this.router.navigate(['']).then(r => console.log('User successfully logged in, navigating to main panel'));
+        this.router.navigate(['']).then( () => console.log('User successfully logged in, navigating to main panel'));
       },
       error: error => {
         console.error('Error during checking user credentials:', error);

@@ -44,7 +44,7 @@ export class RegisterComponent {
     this.api.createUser({username: this.username, password: this.password,
     email: this.email}).subscribe({
       next: response => {
-        this.router.navigate(['login']).then(r => console.log('Successfully registered user, navigating to login panel'));
+        this.router.navigate(['login']).then(() => console.log('Successfully registered user, navigating to login panel'));
       },
       error: error => {
         if (error.status === 409) {
