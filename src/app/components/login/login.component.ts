@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ import {MatButton} from "@angular/material/button";
     MatFormField,
     MatInput,
     MatButton,
-    MatLabel
+    MatLabel,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
