@@ -21,7 +21,7 @@
         <mat-label>Adres email</mat-label>
         <input matInput type="email" [(ngModel)]="email" name="email" #templateMail="ngModel" required email>
         <mat-error *ngIf="templateMail.invalid && templateMail.touched">
-          Proszę wprowadzić poprawny adres email.
+          Niepoprawny format adresu email.
         </mat-error>
       </mat-form-field>
 

@@ -19,3 +19,24 @@ mat-form-field {
   display: block;
   width: 100%;
 }
+
+mat-card {
+  display: block;
+  width: 25vw;
+  margin: 0 auto;
+}
+
+.login-register-button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.center-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
