@@ -1,0 +1,38 @@
+mat-card {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 2em;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+button {
+  margin-top: 2em;
+  padding: 1em 2em;
+}
+
+.resend-button {
+  width: 70%;
+  margin: auto;
+}
+
+.email-not-received-test {
+  color: red;
+}
+
+.small-button {
+  width: 70%;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

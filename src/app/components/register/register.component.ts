@@ -54,8 +54,10 @@ export class RegisterComponent {
     this.isLoading = true;
     this.api.createUser({username: this.username, password: this.password,
     email: this.email}).subscribe({
-      next: () => {
+      next: (userDto) => {
         this.router.navigate(['email-confirmation']).then(() => console.log('Successfully registered user, navigating to login panel'));
+        sessionStorage.setItem('id', <string> userDto.id);
+        sessionStorage.setItem('awaiting-email-confirmation', "true");
         this.isLoading = false;
       },
       error: error => {

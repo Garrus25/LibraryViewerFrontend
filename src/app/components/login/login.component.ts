@@ -51,7 +51,7 @@ export class LoginComponent {
       next: response => {
         this.loginValid = response.token === null;
         sessionStorage.setItem('username', this.username);
-        sessionStorage.setItem('privilegeLevel', "user");
+        sessionStorage.setItem('id', <string> response.id);
         sessionStorage.setItem('token', <string> response.token);
         sessionStorage.setItem('refreshToken', <string> response.refreshToken);
 
