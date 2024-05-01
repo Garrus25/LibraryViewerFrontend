@@ -7,6 +7,7 @@ import {MatInput} from "@angular/material/input";
 import {NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {DefaultService} from "../../openapi";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ import {DefaultService} from "../../openapi";
     MatLabel,
     NgIf,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatProgressSpinnerModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -36,6 +38,8 @@ export class RegisterComponent {
   public password: string = "";
   public email: string = "";
   public errorMessage: string = "";
+  public isLoading: boolean = false;
+
 
   constructor(private api: DefaultService, private router: Router) {
   }
@@ -47,14 +51,17 @@ export class RegisterComponent {
   }
 
   public registerUser(): void {
+    this.isLoading = true;
     this.api.createUser({username: this.username, password: this.password,
     email: this.email}).subscribe({
       next: () => {
-        this.router.navigate(['login']).then(() => console.log('Successfully registered user, navigating to login panel'));
+        this.router.navigate(['email-confirmation']).then(() => console.log('Successfully registered user, navigating to login panel'));
+        this.isLoading = false;
       },
       error: error => {
         if (error.status === 409) {
           this.errorMessage = 'Login i/lub adres email jest już zajęty.';
+          this.isLoading = false;
         }
       }
     });

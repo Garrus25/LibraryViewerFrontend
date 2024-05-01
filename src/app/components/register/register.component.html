@@ -34,5 +34,9 @@
         <button mat-raised-button color="accent" type="submit" routerLink="/login">Powrót do strony logowania</button>
       </div>
     </form>
+
+    <div class="overlay" [class.active]="isLoading">
+      <mat-spinner class="spinner"></mat-spinner>
+    </div>
   </mat-card-content>
 </mat-card>
