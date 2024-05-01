@@ -1,0 +1,21 @@
+<mat-card>
+  <h2 *ngIf="!emailConfirmed">Potwierdź swój adres e-mail</h2>
+  <h2 *ngIf="emailConfirmed">Potwierdzono adres email</h2>
+  <p *ngIf="!emailConfirmed">
+    Dziękujemy za rejestrację! Sprawdź swoją skrzynkę e-mail i kliknij w link, aby potwierdzić adres.
+  </p>
+  <p *ngIf="emailConfirmed">
+    Możesz teraz wrócić do panelu logowania.
+  </p>
+  <p class="email-not-received-test" *ngIf="!emailConfirmed">
+    Nie otrzymałeś wiadomości? Możesz wysłać ją ponownie.
+  </p>
+  <p *ngIf="emailReSent && !emailConfirmed" >
+    Wiadomość email została ponownie wysłana.
+  </p>
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit" class="small-button" *ngIf="!emailConfirmed" (click)="resendEmail()">Wyślij ponownie</button>
+    <button mat-raised-button color="primary" class="small-button" (click)="backToLogin()">Wróć do panelu logowania</button>
+    <button mat-raised-button color="accent" class="small-button" *ngIf="!emailConfirmed" (click)="backToRegister()" >Wróć do panelu rejestracji</button>
+  </div>
+</mat-card>
