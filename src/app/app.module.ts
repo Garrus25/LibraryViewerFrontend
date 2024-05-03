@@ -3,38 +3,48 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
-import { TopBarModule } from './components/top-bar/top-bar.module';
-import { RegisterModule } from './components/register/register.module';
-import { MainModule } from './components/main/main.module';
-import { LoginModule } from './components/login/login.module';
-import { EmailConfirmationModule } from './components/email-confirmation/email-confirmation.module';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 import routeConfig from './app.routes';
-import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FormsModule} from "@angular/forms";
-import {MatSelectModule} from "@angular/material/select";
+import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MatSelectModule } from "@angular/material/select";
+import { LoginComponent } from "./components/login/login.component";
+import { TopBarComponent } from "./components/top-bar/top-bar.component";
+import { MainComponent } from "./components/main/main.component";
+import { EmailConfirmationComponent } from "./components/email-confirmation/email-confirmation.component";
+import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
+import {RegisterComponent} from "./components/register/register.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatIcon} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, LoginComponent, TopBarComponent, MainComponent, EmailConfirmationComponent, RegisterComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routeConfig),
-    TopBarModule,
-    RegisterModule,
-    MainModule,
-    LoginModule,
-    EmailConfirmationModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatIcon
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

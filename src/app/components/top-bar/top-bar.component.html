@@ -1,4 +1,15 @@
 <mat-card>
-  <mat-form-field class="search-bar">
+  <mat-form-field class="search-bar-main">
+    <mat-label>Wyszukaj książkę na podstawie jej tytułu lub autora</mat-label>
+    <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+    <button mat-icon-button matSuffix aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
 </mat-card>
