@@ -1,0 +1,26 @@
+mat-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 12vh;
+  background-color: red;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  width: 30%;
+}
+
+mat-form-field {
+  overflow: hidden;
+}
+
+mat-form-field input.matInput {
+  border-radius: 0 0 10px 10px;
+}
