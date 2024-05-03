@@ -1,32 +1,11 @@
 import {Component, Injectable} from '@angular/core';
-import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {MatCard, MatCardContent} from "@angular/material/card";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
-import {MatInput} from "@angular/material/input";
-import {MatButton} from "@angular/material/button";
-import {Router, RouterLink} from "@angular/router";
 import {DefaultService} from "../../openapi";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [
-    MatSlideToggle,
-    MatCardContent,
-    MatError,
-    MatCard,
-    FormsModule,
-    NgIf,
-    MatFormField,
-    MatInput,
-    MatButton,
-    MatLabel,
-    RouterLink
-  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 
 @Injectable({
@@ -34,7 +13,7 @@ import {DefaultService} from "../../openapi";
 })
 export class LoginComponent {
    public loginValid = true;
-   public username: string = "";
+   public login: string = "";
    public password: string = "";
 
   constructor(private api: DefaultService, private router: Router) {}
@@ -46,11 +25,11 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
-    this.api.checkUserCredentials({username: this.username,
+    this.api.checkUserCredentials({username: this.login,
       password: this.password}).subscribe({
       next: response => {
         this.loginValid = response.token === null;
-        sessionStorage.setItem('username', this.username);
+        sessionStorage.setItem('username', this.login);
         sessionStorage.setItem('id', <string> response.id);
         sessionStorage.setItem('token', <string> response.token);
         sessionStorage.setItem('refreshToken', <string> response.refreshToken);

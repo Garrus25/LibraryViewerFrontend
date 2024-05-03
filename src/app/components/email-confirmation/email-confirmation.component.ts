@@ -1,24 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {MatCard} from "@angular/material/card";
-import {MatButton} from "@angular/material/button";
-import {Router, RouterLink} from "@angular/router";
-import { DefaultService } from "../../openapi";
-import {interval, takeWhile} from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
-import {CommonModule, NgIf} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {DefaultService} from "../../openapi";
+import {Router} from "@angular/router";
+import {interval, startWith, switchMap, takeWhile} from "rxjs";
 
 @Component({
   selector: 'app-email-confirmation',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatButton,
-    RouterLink,
-    NgIf,
-    CommonModule
-  ],
   templateUrl: './email-confirmation.component.html',
-  styleUrl: './email-confirmation.component.css'
+  styleUrls: ['./email-confirmation.component.css']
 })
 export class EmailConfirmationComponent implements OnInit {
   public emailConfirmed: boolean = false;

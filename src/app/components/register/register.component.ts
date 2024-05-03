@@ -1,33 +1,11 @@
-import {Component, Injectable} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent} from "@angular/material/card";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {NgIf} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
-import {DefaultService} from "../../openapi";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { Component, Injectable } from '@angular/core';
+import { Router } from "@angular/router";
+import { DefaultService } from "../../openapi";
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCard,
-    MatCardContent,
-    MatError,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    NgIf,
-    ReactiveFormsModule,
-    RouterLink,
-    MatProgressSpinnerModule
-  ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 
 @Injectable({
@@ -39,7 +17,6 @@ export class RegisterComponent {
   public email: string = "";
   public errorMessage: string = "";
   public isLoading: boolean = false;
-
 
   constructor(private api: DefaultService, private router: Router) {
   }
@@ -53,7 +30,7 @@ export class RegisterComponent {
   public registerUser(): void {
     this.isLoading = true;
     this.api.createUser({username: this.username, password: this.password,
-    email: this.email}).subscribe({
+      email: this.email}).subscribe({
       next: (userDto) => {
         this.router.navigate(['email-confirmation']).then(() => console.log('Successfully registered user, navigating to login panel'));
         sessionStorage.setItem('id', <string> userDto.id);
@@ -67,5 +44,5 @@ export class RegisterComponent {
         }
       }
     });
-    }
+  }
 }

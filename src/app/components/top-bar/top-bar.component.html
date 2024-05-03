@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-form-field class="search-bar-main">
+    <mat-label>Wyszukaj książkę na podstawie jej tytułu lub autora</mat-label>
+    <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+    <button mat-icon-button matSuffix aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <div class="book-option">
+        <span>{{option}}</span>
+        <img *ngIf="getCoverUrl(option) | async as url" [src]="url" alt="Book cover" class="book-cover">
+        <button mat-button color="primary" class="details-button">Przejdź do szczegółów</button>      </div>
+    </mat-option>
+  </mat-autocomplete>
+</mat-card>
