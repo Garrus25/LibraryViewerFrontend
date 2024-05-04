@@ -22,10 +22,17 @@ import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
 import {RegisterComponent} from "./components/register/register.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatIcon} from "@angular/material/icon";
+import {BookDetailsComponent} from "./components/book-details/book-details.component";
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, TopBarComponent, MainComponent, EmailConfirmationComponent, RegisterComponent
+    AppComponent,
+    LoginComponent,
+    TopBarComponent,
+    MainComponent,
+    EmailConfirmationComponent,
+    RegisterComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,5 +53,8 @@ import {MatIcon} from "@angular/material/icon";
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    TopBarComponent
+  ]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 <mat-card>
+  <h1 class="title" [routerLink]="['/']">Library Viewer</h1>
   <mat-form-field class="search-bar-main">
     <mat-label>Wyszukaj książkę na podstawie jej tytułu lub autora</mat-label>
     <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
@@ -10,9 +11,10 @@
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
       <div class="book-option">
-        <span>{{option}}</span>
-        <img *ngIf="getCoverUrl(option) | async as url" [src]="url" alt="Book cover" class="book-cover">
-        <button mat-button color="primary" class="details-button">Przejdź do szczegółów</button>      </div>
+        <span>{{option.title}}</span>
+        <img *ngIf="getCoverUrl(option.title) | async as url" [src]="url" alt="Book cover" class="book-cover">
+        <button *ngIf="option.isbn" mat-raised-button color="primary" class="details-button" [routerLink]="['/book-details', option.isbn]">Przejdź do szczegółów</button>
+      </div>
     </mat-option>
   </mat-autocomplete>
 </mat-card>

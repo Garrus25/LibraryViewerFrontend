@@ -30,8 +30,22 @@ mat-card {
   position: absolute;
   right: 0;
   order: -1;
+  margin-right: 10px;
 }
 
 mat-option {
   position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-left: 20px;
 }
