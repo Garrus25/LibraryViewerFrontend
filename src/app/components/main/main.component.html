@@ -2,3 +2,18 @@
   <app-top-bar></app-top-bar>
 </mat-card>
 
+<div class="center-text">
+  <h1>Odkrywaj oraz dodawaj do naszej bazy danych nowe książki oraz autorów! Pisz recenzje oraz dyskutuj w komentarzach.</h1>
+</div>
+
+<div class="center-text">
+  <h1>Ostatnio dodane książki:</h1>
+</div>
+
+<div class="book-list">
+  <mat-card *ngFor="let book of books" class="book-card">
+    <img *ngIf="getCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <button mat-raised-button color="primary" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
+  </mat-card>
+</div>
