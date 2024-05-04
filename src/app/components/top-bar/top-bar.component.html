@@ -9,11 +9,11 @@
   </mat-form-field>
 
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-      <div class="book-option">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title">
+      <div class="book-option" (click)="$event.stopPropagation()">
         <span>{{option.title}}</span>
         <img *ngIf="getCoverUrl(option.title) | async as url" [src]="url" alt="Book cover" class="book-cover">
-        <button *ngIf="option.isbn" mat-raised-button color="primary" class="details-button" [routerLink]="['/book-details', option.isbn]">Przejdź do szczegółów</button>
+        <button *ngIf="option.isbn" mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(option.isbn)">Przejdź do szczegółów</button>
       </div>
     </mat-option>
   </mat-autocomplete>

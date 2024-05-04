@@ -3,6 +3,7 @@ import {FormControl} from "@angular/forms";
 import {map, Observable, of, startWith} from "rxjs";
 import {BookDTO, DefaultService} from "../../openapi";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-top-bar',
@@ -28,7 +29,8 @@ export class TopBarComponent {
   }
 
   constructor(private api: DefaultService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private router: Router) {
   }
 
   private fetchBooks(): void {
@@ -80,5 +82,9 @@ export class TopBarComponent {
 
     return this.books
       .filter(book => book.title?.toLowerCase().includes(filterValue));
+  }
+
+  navigateToBookDetails(isbn: string): void {
+    this.router.navigate(['/book-details', isbn]);
   }
 }

@@ -36,7 +36,7 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routeConfig),
+    RouterModule.forRoot(routeConfig, { onSameUrlNavigation: 'reload' }),
     MatProgressSpinnerModule,
     HttpClientModule,
     BrowserAnimationsModule,

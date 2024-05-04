@@ -28,13 +28,24 @@ export class BookDetailsComponent {
 
   ngOnInit() {
     this.isbn = this.route.snapshot.paramMap.get('isbn');
+    this.loadBookDetails(this.isbn)
+
+    this.route.params.subscribe(params => {
+      const bookId = params['isbn'];
+      this.loadBookDetails(bookId);
+    });
+  }
+
+  loadBookDetails(isbn: string | null): void {
     if (this.isbn) {
-      this.fetchBookByIsbn(this.isbn).pipe(
-        tap(() => {
-          console.log("Attempt to fetch book cover with name: ", this.bookDto?.coverName);
-          this.fetchBooksCover(this.bookDto?.coverName);
-        })
-      ).subscribe();
+      if (isbn != null) {
+        this.fetchBookByIsbn(isbn).pipe(
+          tap(() => {
+            console.log("Attempt to fetch book cover with name: ", this.bookDto?.coverName);
+            this.fetchBooksCover(this.bookDto?.coverName);
+          })
+        ).subscribe();
+      }
     } else {
       console.error('No isbn provided');
     }
