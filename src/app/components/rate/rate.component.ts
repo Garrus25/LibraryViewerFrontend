@@ -41,11 +41,11 @@ export class RateComponent {
     this.selectedRate = stars;
     console.log(this.selectedRate)
     this.api.addRate({ratedObjectId: this.ratedObjectId, rateType: this.rateType, rateValue: stars, userId: sessionStorage.getItem("id") || ""}).subscribe({
-      next: (cover) => {
+      next: () => {
         console.log('Object rating updated successfully');
         window.location.reload();
       },
-      error: error => {
+      error: () => {
         console.error('Could not update the object rating' + 'Object ID : ' + this.ratedObjectId + 'RateType: ' + this.rateType + 'Stars: ' + stars + 'UserID: '+ sessionStorage.getItem("id") || "");
       }
     });
