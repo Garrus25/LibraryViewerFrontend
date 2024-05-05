@@ -1,8 +1,9 @@
 import {Component, Injectable} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AuthorDTO, DefaultService} from "../../openapi";
+import {AuthorDTO, DefaultService, RateIdentityDTO} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import RateTypeEnum = RateIdentityDTO.RateTypeEnum;
 
 
 @Component({
@@ -14,13 +15,14 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 @Injectable()
 export class AuthorDetailsComponent {
   id?: number | null;
-  bookDTO: AuthorDTO | null = null;
+  authorDTO?: AuthorDTO | null = null;
   authorPicture?: Blob;
   isDescriptionExpanded = false;
   shortDescriptionLimit = 100;
+  protected readonly RateTypeEnum = RateTypeEnum;
 
   isDescriptionLongerThanLimit(): boolean {
-    return !!(this.bookDTO?.description && this.bookDTO.description.length > this.shortDescriptionLimit);
+    return !!(this.authorDTO?.description && this.authorDTO.description.length > this.shortDescriptionLimit);
   }
 
   constructor(private route: ActivatedRoute, private api: DefaultService,
@@ -42,8 +44,8 @@ export class AuthorDetailsComponent {
       if (id != null) {
         this.fetchAuthorById(id).pipe(
           tap(() => {
-            console.log("Attempt to fetch author picture with name: ", this.bookDTO?.pictureName);
-            this.fetchAuthorPicture(this.bookDTO?.pictureName);
+            console.log("Attempt to fetch author picture with name: ", this.authorDTO?.pictureName);
+            this.fetchAuthorPicture(this.authorDTO?.pictureName);
           })
         ).subscribe();
       }
@@ -53,9 +55,9 @@ export class AuthorDetailsComponent {
   }
 
   getDisplayedDescriptionPercentage(): number {
-    if (this.bookDTO?.description) {
-      const displayedLength = this.isDescriptionExpanded ? this.bookDTO.description.length : this.shortDescriptionLimit;
-      return (displayedLength / this.bookDTO.description.length) * 100;
+    if (this.authorDTO?.description) {
+      const displayedLength = this.isDescriptionExpanded ? this.authorDTO.description.length : this.shortDescriptionLimit;
+      return (displayedLength / this.authorDTO.description.length) * 100;
     }
     return 100;
   }
@@ -64,7 +66,7 @@ export class AuthorDetailsComponent {
     return this.api.getAuthorBYId(id).pipe(
       tap((authorDto) => {
         console.log('Author data fetched fetched:', authorDto);
-        this.bookDTO = authorDto;
+        this.authorDTO = authorDto;
       })
     );
   }
@@ -91,4 +93,5 @@ export class AuthorDetailsComponent {
     }
     return of(undefined);
   }
+
 }

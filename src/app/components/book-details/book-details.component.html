@@ -3,17 +3,20 @@
 </mat-card>
 
 <mat-card class="center-card">
-  <mat-icon class="close-icon" (click)="goBack()" title="Przejdź do strony głównej">close</mat-icon>  <div class="book-cover-section">
+  <mat-icon class="close-icon" (click)="goBack()" title="Przejdź do strony głównej">close</mat-icon>
+  <div class="book-cover-section">
     <img *ngIf="getCoverUrl() | async as url" [src]="url" alt="Book cover" class="book-cover">
   </div>
-  <div class="book-details-section">
-    <div class="book-title">{{bookDto?.title}}</div>
+  <div class="author-details-section">
+    <div class="author-name">{{bookDto?.title}}</div>
     <div class="book-content">Autor: {{bookDto?.authorId}}</div>
     <div class="book-content">ISBN: {{bookDto?.isbn}}</div>
-    <div class="book-content">Data wydania: {{bookDto?.publishDate}}</div><div class="book-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="isDescriptionExpanded">Opis: {{bookDto?.description}}</div>
-    <div class="book-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="!isDescriptionExpanded">Opis: {{bookDto?.description}}</div>
-    <button mat-raised-button color="primary" *ngIf="isDescriptionLongerThanLimit()" (click)="isDescriptionExpanded = !isDescriptionExpanded">
+    <div class="book-content">Data wydania: {{bookDto?.publishDate}}</div>
+    <div class="author-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="isDescriptionExpanded">Opis: {{bookDto?.description}}</div>
+    <div class="author-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="!isDescriptionExpanded">Opis: {{bookDto?.description}}</div>
+    <button mat-raised-button color="primary" *ngIf="isDescriptionLongerThanLimit()" (click)="isDescriptionExpanded = !isDescriptionExpanded" class="expand-description-button">
       {{isDescriptionExpanded ? 'Zwiń opis' : 'Rozwiń opis'}}
     </button>
+    <app-rate *ngIf="bookDto" [ratedObjectId]="bookDto?.isbn" [rateType]="RateTypeEnum.Book" class="rate-component"></app-rate>
   </div>
 </mat-card>

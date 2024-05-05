@@ -6,14 +6,15 @@
   <mat-icon class="close-icon" routerLink="/" title="Przejdź do strony głównej">close</mat-icon>  <div class="book-cover-section">
   <img *ngIf="getCoverUrl() | async as url" [src]="url" alt="Book cover" class="book-cover">
 </div>
-  <div class="book-details-section">
-    <div class="book-title">{{bookDTO?.name}} {{bookDTO?.surname}}</div>
-    <div class="book-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
-         *ngIf="isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
-    <div class="book-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
-         *ngIf="!isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
+  <div class="author-details-section">
+    <div class="author-name">{{authorDTO?.name}} {{authorDTO?.surname}}</div>
+    <div class="author-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
+         *ngIf="isDescriptionExpanded">Opis: {{authorDTO?.description}}</div>
+    <div class="author-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
+         *ngIf="!isDescriptionExpanded">Opis: {{authorDTO?.description}}</div>
     <button mat-raised-button color="primary" *ngIf="isDescriptionLongerThanLimit()" (click)="isDescriptionExpanded = !isDescriptionExpanded">
       {{isDescriptionExpanded ? 'Zwiń opis' : 'Rozwiń opis'}}
     </button>
+    <app-rate *ngIf="authorDTO && authorDTO.authorId" [rateType]="RateTypeEnum.Author" [ratedObjectId]="authorDTO.authorId.toString()"></app-rate>
   </div>
 </mat-card>

@@ -1,0 +1,30 @@
+<div class="rate-container">
+  <div class="rate-text">
+    <p *ngIf="selectedRate === 0 && rateType === RateTypeEnum.Book">
+      Oceń tę książkę!
+    </p>
+    <p *ngIf="selectedRate === 0 && rateType === RateTypeEnum.Author">
+      Oceń tego autora!
+    </p>
+    <p *ngIf="selectedRate === 0 && rateType === RateTypeEnum.Review">
+      Oceń tę recenzję!
+    </p>
+    <p *ngIf="selectedRate > 0">
+      Twoja ocena to:
+    </p>
+    <div class="rating">
+      <span class="star" [class.highlight]="selectedRate >= 5" (click)="rateObject(5)">&#9733;</span>
+      <span class="star" [class.highlight]="selectedRate >= 4" (click)="rateObject(4)">&#9733;</span>
+      <span class="star" [class.highlight]="selectedRate >= 3" (click)="rateObject(3)">&#9733;</span>
+      <span class="star" [class.highlight]="selectedRate >= 2" (click)="rateObject(2)">&#9733;</span>
+      <span class="star" [class.highlight]="selectedRate >= 1" (click)="rateObject(1)">&#9733;</span>
+    </div>
+  </div>
+  <div class="average-rate-container">
+    <p class="right-text">Średnia ocena:</p>
+    <p class="average-rate" *ngIf="averageRate; else noRating">{{averageRate}}</p>
+    <ng-template #noRating>
+      <p class="average-rate">Brak ocen</p>
+    </ng-template>
+  </div>
+</div>

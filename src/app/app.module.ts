@@ -25,6 +25,7 @@ import {MatIcon} from "@angular/material/icon";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 import {AllBooksComponent} from "./components/all-books/all-books.component";
+import {RateComponent} from "./components/rate/rate.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import {AllBooksComponent} from "./components/all-books/all-books.component";
     RegisterComponent,
     BookDetailsComponent,
     AuthorDetailsComponent,
-    AllBooksComponent
+    AllBooksComponent,
+    RateComponent
+
   ],
   imports: [
     BrowserModule,

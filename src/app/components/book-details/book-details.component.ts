@@ -1,9 +1,10 @@
 import {Component, Injectable} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {BookDTO, DefaultService} from "../../openapi";
+import {BookDTO, DefaultService, RateIdentityDTO} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import { Location } from '@angular/common';
+import RateTypeEnum = RateIdentityDTO.RateTypeEnum;
 
 
 @Component({
@@ -97,4 +98,6 @@ export class BookDetailsComponent {
   goBack(): void {
     this.location.back();
   }
+
+  protected readonly RateTypeEnum = RateTypeEnum;
 }

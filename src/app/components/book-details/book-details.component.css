@@ -23,7 +23,7 @@ mat-card {
   object-fit: cover;
 }
 
-.book-details-section {
+.author-details-section {
   flex: 1;
   margin-left: -150px;
   margin-right: 15px;
@@ -31,7 +31,7 @@ mat-card {
   font-size: 1.7em;
 }
 
-.book-title {
+.author-name {
   text-align: center;
 }
 
@@ -39,14 +39,14 @@ mat-card {
   margin: 10px 0;
 }
 
-.book-description {
+.author-description {
   margin: 10px 0;
   max-height: 30vh;
   overflow: auto;
   background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0));
 }
 
-.book-description-short {
+.author-description-short {
   margin: 10px 0;
   max-height: 15vh;
   overflow: hidden;
@@ -59,5 +59,13 @@ mat-card {
   right: 10px;
   cursor: pointer;
 }
+
+p {
+  margin-top: 5%;
+}
+.expand-description-button {
+  margin-bottom: 20px;
+}
+
 
 

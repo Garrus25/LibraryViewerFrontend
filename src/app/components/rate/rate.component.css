@@ -1,0 +1,44 @@
+.rate-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rate-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+
+.star {
+  font-size: 2em;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: #ffc107;
+}
+
+.highlight {
+  color: gold;
+}
+
+.average-rate-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.average-rate {
+  text-align: right;
+}
