@@ -23,6 +23,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatIcon} from "@angular/material/icon";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
+import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
     MainComponent,
     EmailConfirmationComponent,
     RegisterComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    AuthorDetailsComponent
   ],
   imports: [
     BrowserModule,

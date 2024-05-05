@@ -31,7 +31,7 @@
   <mat-card *ngFor="let author of authors" class="author-card">
     <img *ngIf="getAuthorPictureUrl(author.authorId) | async as url" [src]="url" alt="Author">
     <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
-    <button mat-raised-button color="primary">Wyświetl szczegóły</button>
+    <button mat-raised-button color="primary" (click)="navigateToAuthorDetails(author.authorId)">Wyświetl szczegóły</button>
   </mat-card>
 </div>
 

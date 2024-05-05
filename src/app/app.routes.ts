@@ -6,6 +6,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {EmailConfirmationComponent} from "./components/email-confirmation/email-confirmation.component";
 import {EmailConfirmationAuthGuard} from "./guards/email-confirmation.auth.guard";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
+import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 
 const routeConfig: Routes = [
   {
@@ -34,6 +35,11 @@ const routeConfig: Routes = [
     path: 'book-details/:isbn',
     component: BookDetailsComponent,
     title: 'Book details'
+  },
+  {
+    path: 'author-details/:id',
+    component: AuthorDetailsComponent,
+    title: 'Author details'
   }
 
 ];

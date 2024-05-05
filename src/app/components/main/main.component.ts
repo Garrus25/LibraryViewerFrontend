@@ -113,5 +113,11 @@ export class MainComponent implements OnInit {
       this.router.navigate(['/book-details', isbn]).then(r => console.log('Navigation result:', r));
     }
   }
+
+  navigateToAuthorDetails(id: number | undefined): void {
+    if (id) {
+      this.router.navigate(['/author-details', id]).then(r => console.log('Navigation result:', r));
+    }
+  }
 }
 
