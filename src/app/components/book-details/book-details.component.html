@@ -3,7 +3,7 @@
 </mat-card>
 
 <mat-card class="center-card">
-  <mat-icon class="close-icon" routerLink="/" title="Przejdź do strony głównej">close</mat-icon>  <div class="book-cover-section">
+  <mat-icon class="close-icon" (click)="goBack()" title="Przejdź do strony głównej">close</mat-icon>  <div class="book-cover-section">
     <img *ngIf="getCoverUrl() | async as url" [src]="url" alt="Book cover" class="book-cover">
   </div>
   <div class="book-details-section">

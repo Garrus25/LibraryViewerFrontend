@@ -8,8 +8,10 @@
 </div>
   <div class="book-details-section">
     <div class="book-title">{{bookDTO?.name}} {{bookDTO?.surname}}</div>
-    <div class="book-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
-    <div class="book-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}" *ngIf="!isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
+    <div class="book-description" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
+         *ngIf="isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
+    <div class="book-description-short" [style]="{'mask-image': 'linear-gradient(to bottom, black ' + getDisplayedDescriptionPercentage() + '%, transparent)'}"
+         *ngIf="!isDescriptionExpanded">Opis: {{bookDTO?.description}}</div>
     <button mat-raised-button color="primary" *ngIf="isDescriptionLongerThanLimit()" (click)="isDescriptionExpanded = !isDescriptionExpanded">
       {{isDescriptionExpanded ? 'Zwiń opis' : 'Rozwiń opis'}}
     </button>

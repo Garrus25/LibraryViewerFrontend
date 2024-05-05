@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {BookDTO, DefaultService} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -23,8 +24,10 @@ export class BookDetailsComponent {
     return !!(this.bookDto?.description && this.bookDto.description.length > this.shortDescriptionLimit);  }
 
 
-  constructor(private route: ActivatedRoute, private api: DefaultService,
-              private sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute,
+              private api: DefaultService,
+              private sanitizer: DomSanitizer,
+              private location: Location) { }
 
   ngOnInit() {
     this.isbn = this.route.snapshot.paramMap.get('isbn');
@@ -89,5 +92,9 @@ export class BookDetailsComponent {
       return of(this.sanitizer.bypassSecurityTrustUrl(objectUrl));
     }
     return of(undefined);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
