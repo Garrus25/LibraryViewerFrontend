@@ -24,6 +24,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatIcon} from "@angular/material/icon";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
+import {AllBooksComponent} from "./components/all-books/all-books.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {AuthorDetailsComponent} from "./components/author-details/author-details
     EmailConfirmationComponent,
     RegisterComponent,
     BookDetailsComponent,
-    AuthorDetailsComponent
+    AuthorDetailsComponent,
+    AllBooksComponent
   ],
   imports: [
     BrowserModule,
