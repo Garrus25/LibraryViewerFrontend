@@ -1,5 +1,5 @@
 import {Component, OnInit, Injectable} from '@angular/core';
-import {DefaultService, BookDTO} from "../../openapi";
+import {DefaultService, BookDTO, AuthorDTO} from "../../openapi";
 import {Router} from "@angular/router";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {Observable, of} from "rxjs";
@@ -12,12 +12,15 @@ import {Observable, of} from "rxjs";
 })
 export class MainComponent implements OnInit {
   books: BookDTO[] = [];
+  authors: AuthorDTO[] = [];
   bookCovers: Map<string, Blob> = new Map();
+  authorPhotos: Map<string, Blob> = new Map();
 
   constructor(private api: DefaultService, private router: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.fetchAuthors();
   }
 
   private fetchBooks(): void {
@@ -35,6 +38,36 @@ export class MainComponent implements OnInit {
     });
   }
 
+  private fetchAuthors(): void {
+    this.api.getNewlyAddedAuthors(5).subscribe({
+      next: (authors) => {
+        this.authors = authors;
+        console.log('Authors fetched:', this.authors);
+        this.authors.forEach(author => {
+          this.fetchAuthorPictures(author.pictureName, author.authorId);
+        });
+      },
+      error: error => {
+        console.error('Error during fetching authors:', error);
+      }
+    });
+  }
+
+  private fetchAuthorPictures(pictureName?: string, id?: number): void {
+    if (pictureName && id) {
+      this.api.getAuthorPicture(pictureName).subscribe({
+        next: (picture) => {
+          this.authorPhotos.set(id.toString(), picture);
+        },
+        error: error => {
+          console.error('Error during fetching author picture:', error);
+        }
+      });
+    } else {
+      console.error('Picture name or author id is undefined');
+    }
+  }
+
   private fetchBooksCover(coverName?: string, isbn?: string): void {
     if (coverName && isbn) {
       this.api.getBookCover(coverName).subscribe({
@@ -50,11 +83,25 @@ export class MainComponent implements OnInit {
     }
   }
 
-  getCoverUrl(isbn: string | undefined): Observable<SafeUrl | undefined> {
+  getBookCoverUrl(isbn: string | undefined): Observable<SafeUrl | undefined> {
     if (isbn) {
-      const bookCover = this.bookCovers.get(isbn);
-      if (bookCover) {
-        const objectUrl = URL.createObjectURL(bookCover);
+      const cover = this.bookCovers.get(isbn);
+      if (cover) {
+        const objectUrl = URL.createObjectURL(cover);
+        console.log('Book cover url:', objectUrl)
+        return of(this.sanitizer.bypassSecurityTrustUrl(objectUrl));
+      }
+    }
+    return of(undefined);
+  }
+
+  getAuthorPictureUrl(id: number | undefined): Observable<SafeUrl | undefined> {
+    if (id) {
+      const idStr = id.toString();
+      const picture = this.authorPhotos.get(idStr);
+      if (picture) {
+        const objectUrl = URL.createObjectURL(picture);
+        console.log('Author picture url:', objectUrl)
         return of(this.sanitizer.bypassSecurityTrustUrl(objectUrl));
       }
     }
