@@ -2,8 +2,8 @@ import {Component, Injectable} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {map, Observable, of, startWith} from "rxjs";
 import {BookDTO, DefaultService} from "../../openapi";
-import {Router} from "@angular/router";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-top-bar',
@@ -15,7 +15,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 export class TopBarComponent {
   searchControl = new FormControl();
   books: BookDTO[] = [];
-  filteredOptions?: Observable<string[]>;
+  filteredOptions?: Observable<BookDTO[]>;
   bookCovers: Map<string, Blob> = new Map<string, Blob>();
 
   ngOnInit() {
@@ -29,16 +29,16 @@ export class TopBarComponent {
   }
 
   constructor(private api: DefaultService,
-              private router: Router,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private router: Router) {
   }
 
   private fetchBooks(): void {
     this.api.getAllBooks().subscribe({
       next: (books) => {
         books.forEach(book => {
-            this.books.push(book);
-            this.fetchBooksCovers(book.coverName, book.title);
+          this.books.push(book);
+          this.fetchBooksCovers(book.coverName, book.title);
         });
         console.log('Books fetched:', books);
       },
@@ -65,8 +65,11 @@ export class TopBarComponent {
     }
   }
 
-  getCoverUrl(title: string): Observable<SafeUrl | undefined> {
-    const coverBlob = this.bookCovers.get(title);
+  getCoverUrl(title?: string): Observable<SafeUrl | undefined> {
+    let coverBlob: Blob | undefined;
+    if (title != null) {
+      coverBlob = this.bookCovers.get(title);
+    }
     if (coverBlob) {
       const objectUrl = URL.createObjectURL(coverBlob);
       return of(this.sanitizer.bypassSecurityTrustUrl(objectUrl));
@@ -74,11 +77,14 @@ export class TopBarComponent {
     return of(undefined);
   }
 
-  private filter(value: string): string[] {
+  private filter(value: string): BookDTO[] {
     const filterValue = value.toLowerCase();
 
     return this.books
-      .filter(book => book.title?.toLowerCase().includes(filterValue))
-      .map(book => book.title as string);
+      .filter(book => book.title?.toLowerCase().includes(filterValue));
+  }
+
+  navigateToBookDetails(isbn: string): void {
+    this.router.navigate(['/book-details', isbn]);
   }
 }
