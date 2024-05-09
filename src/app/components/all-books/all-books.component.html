@@ -9,12 +9,8 @@
   <div class="filter-panel">
     <h2>Filtry</h2>
     <mat-checkbox [(ngModel)]="alphabeticalOrder" (change)="searchBooks()">Filtruj alfabetycznie</mat-checkbox>
-    <mat-checkbox [(ngModel)]="ratingFilterEnabled" (change)="searchBooks()">Filtruj na podstawie oceny</mat-checkbox>    <p>Minimalna ocena:</p>
-    <mat-slider #slider="matSlider" min="1" max="5" step="0.1" [displayWith]="formatLabel" discrete [ngModel]="ratingFilter" (ngModelChange)="ratingFilter = $event; searchBooks()">
-      <input matSliderThumb>
-    </mat-slider>
+    <mat-checkbox [(ngModel)]="ratingFilterEnabled" (change)="searchBooks()">Filtruj na podstawie oceny</mat-checkbox>
   </div>
-
 
   <div class="book-list">
     <mat-card *ngFor="let book of filteredBooks" class="book-card">
