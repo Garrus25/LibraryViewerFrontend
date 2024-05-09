@@ -17,6 +17,6 @@
     <button mat-raised-button color="primary" *ngIf="isDescriptionLongerThanLimit()" (click)="isDescriptionExpanded = !isDescriptionExpanded" class="expand-description-button">
       {{isDescriptionExpanded ? 'Zwiń opis' : 'Rozwiń opis'}}
     </button>
-    <app-rate *ngIf="bookDto" [ratedObjectId]="bookDto?.isbn" [rateType]="RateTypeEnum.Book" class="rate-component"></app-rate>
+    <app-rate *ngIf="bookDto" [ratedObjectId]="bookDto.isbn" [rateType]="RateTypeEnum.Book" class="rate-component"></app-rate>
   </div>
 </mat-card>

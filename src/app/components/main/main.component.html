@@ -19,6 +19,18 @@
 </div>
 
 <div class="center-text">
+  <h1>Najwyżej oceniane książki:</h1>
+</div>
+
+<div class="book-list">
+  <mat-card *ngFor="let topRatedBook of topRatedBooks" class="book-card">
+    <img *ngIf="getBookCoverUrl(topRatedBook?.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
+    <mat-card-title>{{topRatedBook?.title}}</mat-card-title>
+    <p>Średnia ocena: {{topRatedBook?.averageRating}}</p>
+    <button mat-raised-button color="primary" (click)="navigateToBookDetails(topRatedBook?.isbn)">Wyświetl szczegóły</button>
+  </mat-card>
+</div>
+<div class="center-text">
   <button mat-raised-button color="primary" routerLink="/books">Wyświetl wszystkie książki</button>
 </div>
 
