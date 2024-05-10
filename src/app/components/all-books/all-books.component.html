@@ -1,4 +1,6 @@
 <div class="search-bar">
+  <mat-icon class="close-icon" (click)="navigateToHomePage()">close</mat-icon>
+
   <mat-form-field appearance="fill" class="search-field">
     <mat-label>Wyszukaj książkę</mat-label>
     <input matInput type="text" placeholder="Wpisz tytuł książki..." [(ngModel)]="searchTerm" (input)="searchBooks()">

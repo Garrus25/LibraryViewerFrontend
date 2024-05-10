@@ -124,4 +124,8 @@ export class AllBooksComponent {
         }
       });
   }
+
+  navigateToHomePage(): void {
+    this.router.navigate(['/']).then(r => console.log('Navigation result:', r));
+  }
 }
