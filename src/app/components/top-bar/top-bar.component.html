@@ -1,20 +1,24 @@
 <mat-card>
-  <h1 class="title" [routerLink]="['/']">Library Viewer</h1>
-  <mat-form-field class="search-bar-main">
-    <mat-label>Wyszukaj książkę na podstawie jej tytułu lub autora</mat-label>
-    <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
-    <button mat-icon-button matSuffix aria-label="Search">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field>
+  <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+    <h1 class="title" [routerLink]="['/']">Library Viewer</h1>
+    <mat-form-field class="search-bar-main">
+      <mat-label>Wyszukaj książkę na podstawie jej tytułu lub autora</mat-label>
+      <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+      <button mat-icon-button matSuffix aria-label="Search">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
 
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title">
-      <div class="book-option" (click)="$event.stopPropagation()">
-        <span>{{option.title}}</span>
-        <img *ngIf="getCoverUrl(option.title) | async as url" [src]="url" alt="Book cover" class="book-cover">
-        <button *ngIf="option.isbn" mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(option.isbn)">Przejdź do szczegółów</button>
-      </div>
-    </mat-option>
-  </mat-autocomplete>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.title">
+        <div class="book-option" (click)="$event.stopPropagation()">
+          <span>{{option.title}}</span>
+          <img *ngIf="getCoverUrl(option.title) | async as url" [src]="url" alt="Book cover" class="book-cover">
+          <button *ngIf="option.isbn" mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(option.isbn)">Przejdź do szczegółów</button>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+
+  <app-user-panel-small></app-user-panel-small>
 </mat-card>

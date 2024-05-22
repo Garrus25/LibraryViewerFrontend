@@ -5,6 +5,8 @@ mat-card {
   width: 100%;
   height: 12vh;
   background-color: red;
+  position: relative;
+
 }
 .search-bar-main {
   width: 30vw;
@@ -48,4 +50,9 @@ mat-option {
   justify-content: center;
   height: 100%;
   margin-left: 20px;
+}
+
+app-user-panel-small {
+  position: absolute;
+  right: 0;
 }

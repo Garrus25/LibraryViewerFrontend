@@ -28,6 +28,8 @@ import {AuthorDetailsComponent} from "./components/author-details/author-details
 import {AllBooksComponent} from "./components/all-books/all-books.component";
 import {RateComponent} from "./components/rate/rate.component";
 import {MatSliderModule} from "@angular/material/slider";
+import {UserPanelSmallComponent} from "./components/user-panel-small/user-panel-small.component";
+import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {MatSliderModule} from "@angular/material/slider";
     BookDetailsComponent,
     AuthorDetailsComponent,
     AllBooksComponent,
-    RateComponent
+    RateComponent,
+    UserPanelSmallComponent,
+    UserPanelComponent
   ],
   imports: [
     BrowserModule,

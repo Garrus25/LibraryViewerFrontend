@@ -8,6 +8,7 @@ import {EmailConfirmationAuthGuard} from "./guards/email-confirmation.auth.guard
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 import {AllBooksComponent} from "./components/all-books/all-books.component";
+import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 
 const routeConfig: Routes = [
   {
@@ -46,7 +47,13 @@ const routeConfig: Routes = [
     path: 'books',
     component: AllBooksComponent,
     title: 'List of all books'
+  },
+  {
+    path: 'user-panel',
+    component: UserPanelComponent,
+    title: 'User Panel'
   }
+
 
 ];
 

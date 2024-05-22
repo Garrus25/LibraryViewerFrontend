@@ -1,0 +1,52 @@
+<div class="user-info">
+  <h2>Informacje o użytkowniku</h2>
+  <p class="user-name">Nazwa użytkownika: {{userDto?.username}}</p>
+  <p class="user-email">Email: {{userDto?.email}}</p>
+
+  <div class="password-change">
+    <h3>Zmiana hasła</h3>
+    <form #passwordForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Stare hasło</mat-label>
+        <input matInput type="password"  name="oldPassword" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nowe hasło</mat-label>
+        <input matInput type="password"  name="newPassword" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!passwordForm.valid" type="submit">Zmień hasło</button>
+    </form>
+  </div>
+
+  <button mat-icon-button class="close-button" routerLink="/">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="user-books">
+  <h2>Dodane przez Ciebie książki</h2>
+  <!-- Content will go here -->
+</div>
+
+<div class="book-list">
+  <mat-card *ngFor="let book of booksDto" class="book-card">
+    <img *ngIf="getBookCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
+      <button mat-raised-button class="delete-button">Usuń</button>
+    </div>
+  </mat-card>
+</div>
+
+<div class="user-authors">
+  <h2>Dodane przez Ciebie autorzy</h2>
+  <!-- Content will go here -->
+</div>
+
+<div class="user-reviews">
+  <h2>Twoje recenzje</h2>
+  <!-- Content will go here -->
+</div>
