@@ -25,12 +25,18 @@
   </button>
 </div>
 
-<div class="user-books">
-  <h2>Dodane przez Ciebie książki</h2>
-  <!-- Content will go here -->
+<div class="user-books-message">
+  <h2>Dodane przez Ciebie książki:</h2>
 </div>
 
 <div class="book-list">
+  <div *ngIf="booksDto.length === 0">
+    <h2> Nie dodałeś jeszcze żadnej książki, możesz to zrobić klikając poniższy przycisk:</h2>
+    <div class="center-button">
+      <button mat-raised-button color="primary" class="add-element-button">Dodaj książkę</button>
+    </div>
+  </div>
+
   <mat-card *ngFor="let book of booksDto" class="book-card">
     <img *ngIf="getBookCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
     <mat-card-title>{{book.title}}</mat-card-title>
@@ -41,12 +47,20 @@
   </mat-card>
 </div>
 
-<div class="user-authors">
-  <h2>Dodane przez Ciebie autorzy</h2>
-  <!-- Content will go here -->
+<div class="user-books-message">
+  <h2>Dodani przez Ciebie autorzy:</h2>
+</div>
+
+<div class="book-list">
+  <mat-card *ngFor="let author of authors" class="book-card">
+    <img *ngIf="getAuthorPictureUrl(author.authorId?.toString()) | async as url" [src]="url" alt="author">    <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="details-button" (click)="navigateToAuthorDetails(author.authorId)">Wyświetl szczegóły</button>
+      <button mat-raised-button class="delete-button">Usuń</button>
+    </div>
+  </mat-card>
 </div>
 
 <div class="user-reviews">
   <h2>Twoje recenzje</h2>
-  <!-- Content will go here -->
 </div>

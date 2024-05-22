@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {BookDTO, DefaultService, UserDTO} from "../../openapi";
+import {AuthorDTO, BookDTO, DefaultService, UserDTO} from "../../openapi";
 import {Router} from "@angular/router";
-import {Observable, of} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
@@ -13,6 +13,8 @@ export class UserPanelComponent {
   userDto: UserDTO | undefined = undefined;
   booksDto: BookDTO[] = [];
   bookCovers: Map<string, Blob> = new Map();
+  authorPhotos: Map<string, Blob> = new Map();
+  authors: AuthorDTO[] = [];
 
   constructor(private api: DefaultService,
               private router: Router,
@@ -22,6 +24,7 @@ export class UserPanelComponent {
   ngOnInit(): void {
     this.fetchUserData();
     this.fetchBooks();
+    this.fetchAuthors();
   }
 
   private fetchUserData(): void {
@@ -75,9 +78,57 @@ export class UserPanelComponent {
     }
   }
 
+  private fetchAuthors(): void {
+    // @ts-ignore
+    this.api.getAllAuthorsCreatedBySpecificUser(sessionStorage.getItem('id')).subscribe({
+      next: (authors) => {
+        this.authors = authors;
+        console.log('Authors fetched:', this.authors);
+        this.authors.forEach(author => {
+          if (author.pictureName != null) {
+            this.fetchAuthorPictures(author.pictureName).subscribe(pictureUrl => {
+              if (author.authorId){
+                this.authorPhotos.set(author.authorId.toString(), <Blob>pictureUrl);
+              }
+            });
+          }
+        });
+      },
+      error: error => {
+        console.error('Error during fetching authors:', error);
+      }
+    });
+  }
+
+  fetchAuthorPictures(pictureName: string | undefined): Observable<SafeUrl | undefined> {
+    if (pictureName) {
+      return this.api.getAuthorPicture(pictureName).pipe(
+        map(picture => {
+          if (picture) {
+            const objectUrl = URL.createObjectURL(picture);
+            return this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+          }
+          return undefined;
+        }),
+        catchError(error => {
+          console.error('Error during fetching author picture:', error);
+          return of(undefined);
+        })
+      );
+    } else {
+      return of(undefined);
+    }
+  }
+
   navigateToBookDetails(isbn: string | undefined): void {
     if (isbn) {
       this.router.navigate(['/book-details', isbn]).then(r => console.log('Navigation result:', r));
+    }
+  }
+
+  navigateToAuthorDetails(authorId: number | undefined): void {
+    if (authorId) {
+      this.router.navigate(['/author-details', authorId]).then(r => console.log('Navigation result:', r));
     }
   }
 
@@ -93,4 +144,10 @@ export class UserPanelComponent {
     return of(undefined);
   }
 
+  getAuthorPictureUrl(authorId: string | undefined): Observable<SafeUrl | undefined> {
+    if (authorId) {
+      return of(this.authorPhotos.get(authorId));
+    }
+    return of(undefined);
+  }
 }

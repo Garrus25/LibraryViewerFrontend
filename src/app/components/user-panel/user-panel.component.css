@@ -24,14 +24,14 @@
   right: 0;
 }
 
-.user-books,
+.user-books-message,
 .user-authors,
 .user-reviews {
   width: 80%; /* Adjust the width as needed */
   margin: 20px auto; /* Center the sections */
 }
 
-.user-books h2,
+.user-books-message h2,
 .user-authors h2,
 .user-reviews h2 {
   text-align: center; /* Center the titles */
@@ -104,3 +104,13 @@
   display: flex;
   justify-content: space-between;
 }
+
+.details-button {
+  width: 50%;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+}
+
