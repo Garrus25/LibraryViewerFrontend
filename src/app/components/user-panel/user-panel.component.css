@@ -89,26 +89,21 @@
 
 .details-button,
 .delete-button {
-  width: 63%; /* Decreased by 10% */
-  margin: 2px auto; /* Added small margin */
-  font-size: 90%; /* Decreased font size */
-  margin-bottom: 10px; /* Added margin at the bottom */
+  font-size: 90%;
 }
 
 .delete-button {
-  width: 22.5%; /* Decreased by 10% */
-  background-color: red !important; /* Changed background color to red */
+  width: 22.5%;
+  background-color: red !important;
   color: white !important;
 }
 
 .button-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.details-button {
-  width: 50%;
-}
 
 .center-button {
   display: flex;
@@ -117,4 +112,53 @@
 
 body {
   background: linear-gradient(to right, #d3d3d3, #a9a9a9);
+}
+
+.review-title,
+.details-button {
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+
+.read-more-button {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 30%;
+}
+
+.user-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 10%;
+}
+
+.review-card {
+  width: calc(48% - 60px);
+  margin-bottom: 2%;
+  margin-right: 30px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.edit-button {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 30%;
+  margin-left: -50px; /* Dodajemy negatywny margines */
+
+}
+
+.button-container-review {
+  display: flex;
+  justify-content: space-around;
 }

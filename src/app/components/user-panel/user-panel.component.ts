@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthorDTO, BookDTO, DefaultService, UserDTO} from "../../openapi";
+import {AuthorDTO, BookDTO, DefaultService, ReviewDTO, UserDTO} from "../../openapi";
 import {Router} from "@angular/router";
 import {catchError, map, Observable, of} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
@@ -15,6 +15,7 @@ export class UserPanelComponent {
   bookCovers: Map<string, Blob> = new Map();
   authorPhotos: Map<string, Blob> = new Map();
   authors: AuthorDTO[] = [];
+  reviews: ReviewDTO[] = [];
 
   constructor(private api: DefaultService,
               private router: Router,
@@ -25,6 +26,7 @@ export class UserPanelComponent {
     this.fetchUserData();
     this.fetchBooks();
     this.fetchAuthors();
+    this.fetchReviews();
   }
 
   private fetchUserData(): void {
@@ -37,6 +39,23 @@ export class UserPanelComponent {
         },
         error: error => {
           console.error('Error during fetching user data:', error);
+        }
+      });
+    } else {
+      console.error('User id is undefined');
+    }
+  }
+
+  private fetchReviews(): void {
+    const id = sessionStorage.getItem("id");
+    if (id !== null) {
+      this.api.getAllReviewsCreatedBySpecificUser(id).subscribe({
+        next: (reviews) => {
+          this.reviews = reviews;
+          console.log('Review data fetched:', this.userDto);
+        },
+        error: error => {
+          console.error('Error during fetching review data:', error);
         }
       });
     } else {

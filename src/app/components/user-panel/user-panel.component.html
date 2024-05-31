@@ -61,6 +61,19 @@
   </mat-card>
 </div>
 
+<h2>Twoje recenzje</h2>
+
 <div class="user-reviews">
-  <h2>Twoje recenzje</h2>
+
+  <div *ngFor="let review of reviews" class="review-card">
+    <h3 class="review-title">{{review.title}}</h3>
+    <p class="review-excerpt">{{review.content}}</p>
+    <div class="button-container-review">
+      <button mat-raised-button color="primary" class="read-more-button">Czytaj dalej</button>
+      <button mat-raised-button color="primary" class="edit-button">Edytuj</button>
+    </div>
+  </div>
+
 </div>
+
+
