@@ -1,0 +1,17 @@
+<div class="container">
+  <button mat-icon-button class="close-icon" (click)="goBack()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="author-list">
+    <mat-card *ngFor="let author of authors" class="author-card">
+      <img *ngIf="getAuthorPictureUrl(author.authorId!) | async as url" [src]="url" alt="Author">
+      <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+      <button mat-raised-button color="primary" (click)="navigateToAuthorDetails(author.authorId!)">Wyświetl szczegóły</button>
+    </mat-card>
+  </div>
+</div>
+
+<div class="add-author-button-container">
+  <button mat-raised-button color="primary" (click)="navigateToAddAuthor()">Dodaj autora</button>
+</div>

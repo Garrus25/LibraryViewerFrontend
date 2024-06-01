@@ -1,0 +1,24 @@
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+  <h2>Recenzja książki: {{bookTitle}}</h2>
+  <mat-form-field class="full-width-input">
+    <mat-label>Tytuł recenzji</mat-label>
+    <input matInput formControlName="title">
+    <mat-error *ngIf="reviewForm.get('title')?.invalid && reviewForm.get('title')?.touched">
+      Długośc tytułu powinna wynosić od 1 do 64 znaków
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width-input">
+    <mat-label>Treść recenzji</mat-label>
+    <textarea matInput formControlName="content"></textarea>
+    <mat-error *ngIf="reviewForm.get('content')?.invalid && reviewForm.get('content')?.touched">
+      Długość recenzji powinna wynosić od 1 do 5000 znaków
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Dodaj recenzję</button>
+
+  <button mat-icon-button class="close-button" (click)="goBack()">
+    <mat-icon>close</mat-icon>
+  </button>
+</form>

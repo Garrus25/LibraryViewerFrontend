@@ -1,7 +1,29 @@
-<div class="book-list">
-  <mat-card *ngFor="let book of books" class="book-card">
-    <img *ngIf="getCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
-    <mat-card-title>{{book.title}}</mat-card-title>
-    <button mat-raised-button color="primary" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
-  </mat-card>
+<div class="search-bar">
+  <mat-icon class="close-icon" (click)="navigateToHomePage()">close</mat-icon>
+
+  <mat-form-field appearance="fill" class="search-field">
+    <mat-label>Wyszukaj książkę</mat-label>
+    <input matInput type="text" placeholder="Wpisz tytuł książki..." [(ngModel)]="searchTerm" (input)="searchBooks()">
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <div class="filter-panel">
+    <h2>Filtry</h2>
+    <mat-checkbox [(ngModel)]="alphabeticalOrder" (change)="searchBooks()">Filtruj alfabetycznie</mat-checkbox>
+    <mat-checkbox [(ngModel)]="ratingFilterEnabled" (change)="searchBooks()">Filtruj na podstawie oceny</mat-checkbox>
+  </div>
+
+  <div class="book-list">
+    <mat-card *ngFor="let book of filteredBooks" class="book-card">
+      <img *ngIf="getCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
+      <mat-card-title>{{book.title}}</mat-card-title>
+      <p>Ocena: {{book.averageRating}}</p>
+      <button mat-raised-button color="primary" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
+    </mat-card>
+  </div>
+</div>
+
+<div class="add-book-button-container">
+  <button mat-raised-button color="primary" class="add-book-button" routerLink="/add-book-form">Dodaj nową książkę</button>
 </div>

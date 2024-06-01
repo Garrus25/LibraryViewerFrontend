@@ -1,6 +1,6 @@
 import {Component, Injectable} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {BookDTO, DefaultService, RateIdentityDTO} from "../../openapi";
+import {ActivatedRoute, Router} from "@angular/router";
+import {BookDTO, DefaultService, RateIdentityDTO, ReviewDTO} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import { Location } from '@angular/common';
@@ -20,6 +20,8 @@ export class BookDetailsComponent {
   bookCover?: Blob;
   isDescriptionExpanded = false;
   shortDescriptionLimit = 100;
+  reviews: ReviewDTO[] = [];
+
 
   isDescriptionLongerThanLimit(): boolean {
     return !!(this.bookDto?.description && this.bookDto.description.length > this.shortDescriptionLimit);  }
@@ -28,11 +30,13 @@ export class BookDetailsComponent {
   constructor(private route: ActivatedRoute,
               private api: DefaultService,
               private sanitizer: DomSanitizer,
-              private location: Location) { }
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit() {
     this.isbn = this.route.snapshot.paramMap.get('isbn');
     this.loadBookDetails(this.isbn)
+    this.fetchReviews()
 
     this.route.params.subscribe(params => {
       const bookId = params['isbn'];
@@ -95,8 +99,27 @@ export class BookDetailsComponent {
     return of(undefined);
   }
 
+  private fetchReviews(): void {
+    if (this.isbn !== null) {
+      this.api.getReviewsByBookId(this.isbn!).subscribe({
+        next: (reviews) => {
+          this.reviews = reviews;
+        },
+        error: error => {
+          console.error('Error during fetching review data:', error);
+        }
+      });
+    } else {
+      console.error('User id is undefined');
+    }
+  }
+
   goBack(): void {
     this.location.back();
+  }
+
+  navigateToAddReviewForm(): void {
+    this.router.navigate(['/add-review-form', this.bookDto?.isbn, this.bookDto?.title]);
   }
 
   protected readonly RateTypeEnum = RateTypeEnum;

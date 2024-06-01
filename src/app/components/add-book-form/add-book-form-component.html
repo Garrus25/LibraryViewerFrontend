@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <h2>Panel dodawania książki</h2>
+
+  <mat-form-field class="form-group">
+    <mat-label>ISBN</mat-label>
+    <input matInput type="text" formControlName="isbn" id="isbn">
+    <mat-error *ngIf="form.get('isbn')?.touched && form.get('isbn')?.invalid">
+      <span *ngIf="form.get('isbn')?.errors?.['required']">Pole ISBN jest wymagane.</span>
+      <span *ngIf="form.get('isbn')?.errors?.['minLength']">ISBN powinien zawierać co najmniej 10 cyfr.</span>
+      <span *ngIf="form.get('isbn')?.errors?.['pattern']">Nieprawidłowy format ISBN. ISBN powinien zawierać od 10 do 13 cyfr.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-group">
+    <mat-label>Tytuł</mat-label>
+    <input matInput type="text" formControlName="title" id="title">
+    <mat-error *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <span *ngIf="form.get('title')?.errors?.['required']">Pole tytuł jest wymagane.</span>
+      <span *ngIf="form.get('description')?.errors?.['minLength']">Opis powinien zawierać co najmniej 1 znak.</span>
+      <span *ngIf="form.get('title')?.errors?.['maxLength']">Tytuł powinien zawierać od 1 do 64 znaków.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-group">
+    <mat-label>Opis</mat-label>
+    <textarea matInput formControlName="description" id="description"></textarea>
+    <mat-error *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+      <span *ngIf="form.get('description')?.errors?.['required']">Pole opis jest wymagane.</span>
+      <span *ngIf="form.get('title')?.errors?.['minLength']">Tytuł powinien zawierać co najmniej 1 znak.</span>
+      <span *ngIf="form.get('description')?.errors?.['maxLength']">Opis powinien zawierać pomiędzy 1 a 10000 znaków.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <h4>Wybierz zdjęcie w formacie jpg o rozmiarze 351x500 px.</h4>
+  <input type="file" (change)="onFileSelected($event)" id="fileInput">
+  <mat-error *ngIf="form.get('image')?.errors">
+    <span *ngIf="form.get('image')?.errors?.['invalidFormat']">Plik posiada niepoprawny format. Proszę wybrać plik .jpg.</span>
+    <span *ngIf="form.get('image')?.errors?.['invalidSize']">Plik posiada niepoprawny rozmiar. Proszę wybrać obraz o wymiarach 351x500 px.</span>
+  </mat-error>
+  <p *ngIf="selectedImage" class="uploaded-file">Przesłany plik</p>
+  <img [src]="selectedImage" *ngIf="selectedImage" class="selected-image">
+  <button mat-raised-button color="primary" type="submit" class="submit-button">Dodaj książkę</button>
+
+  <button mat-icon-button class="close-button" routerLink="/">
+    <mat-icon>close</mat-icon>
+  </button>
+</form>

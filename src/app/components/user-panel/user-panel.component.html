@@ -1,0 +1,73 @@
+<div class="user-info">
+  <h2>Informacje o użytkowniku</h2>
+  <p class="user-name">Nazwa użytkownika: {{userDto?.username}}</p>
+  <p class="user-email">Email: {{userDto?.email}}</p>
+
+  <div class="password-change">
+    <h3>Zmiana hasła</h3>
+    <form #passwordForm="ngForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Stare hasło</mat-label>
+        <input matInput type="password"  name="oldPassword" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nowe hasło</mat-label>
+        <input matInput type="password"  name="newPassword" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!passwordForm.valid" type="submit">Zmień hasło</button>
+    </form>
+  </div>
+
+  <button mat-icon-button class="close-button" routerLink="/">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="user-books-message">
+  <h2>Dodane przez Ciebie książki:</h2>
+</div>
+
+<div class="book-list">
+  <div *ngIf="booksDto.length === 0">
+    <h2> Nie dodałeś jeszcze żadnej książki, możesz to zrobić klikając poniższy przycisk:</h2>
+    <div class="center-button">
+      <button mat-raised-button color="primary" class="add-book-button" routerLink="/add-book-form">Dodaj nową książkę</button>
+    </div>
+  </div>
+
+  <mat-card *ngFor="let book of booksDto" class="book-card">
+    <img *ngIf="getBookCoverUrl(book.isbn) | async as url" [src]="url" alt="Book cover" class="book-cover">
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
+      <button mat-raised-button class="delete-button" (click)="deleteBook(book.isbn!)">Usuń</button>    </div>
+  </mat-card>
+</div>
+
+<div class="user-books-message">
+  <h2>Dodani przez Ciebie autorzy:</h2>
+</div>
+
+<div class="book-list">
+  <mat-card *ngFor="let author of authors" class="book-card">
+    <img *ngIf="getAuthorPictureUrl(author.authorId?.toString()) | async as url" [src]="url" alt="author">    <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="details-button" (click)="navigateToAuthorDetails(author.authorId)">Wyświetl szczegóły</button>
+      <button mat-raised-button class="delete-button" (click)="deleteAuthor(author.authorId!)">Usuń</button>    </div>
+  </mat-card>
+</div>
+
+<h2 class="your-reviews-header">Twoje recenzje</h2>
+
+<div class="user-reviews">
+  <div *ngFor="let review of reviews" class="review-card">
+    <h3 class="review-title">Recenzja książki: {{review.title}}</h3>
+    <mat-card-title class="centered-title">{{getBookNameByBookId(review.bookId!) | async}}</mat-card-title>
+    <p class="review-excerpt">{{review.content}}</p>
+    <div class="button-container-review">
+      <button mat-button class="edit-button" [routerLink]="['/add-review-form', review.reviewId]" [ngStyle]="{'background-color': '#3f51b5', 'color': 'white'}">Edytuj</button>
+    </div>
+  </div>
+</div>

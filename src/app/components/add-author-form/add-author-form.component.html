@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Panel dodawania autora</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Imię</mat-label>
+    <input matInput formControlName="firstName">
+    <mat-error *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
+      Imie autora jest wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nazwisko</mat-label>
+    <input matInput formControlName="lastName">
+    <mat-error *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+      Nazwisko autora jest wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Opis</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+      Opis autora jest wymagany
+    </mat-error>
+  </mat-form-field>
+  <h4>Wybierz zdjęcie w formacie jpg o rozmiarze 351x500 px.</h4>
+
+  <input type="file" (change)="onFileSelected($event)" />
+  <p *ngIf="selectedImage" class="uploaded-file">Przesłany plik</p>
+
+  <img [src]="selectedImage" *ngIf="selectedImage" class="selected-image" alt="">
+  <button class="submit-author-button" mat-raised-button color="primary" type="submit">Dodaj autora</button>
+
+  <button mat-icon-button class="close-button" (click)="goBack()">
+    <mat-icon>close</mat-icon>
+  </button>
+</form>

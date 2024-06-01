@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HammerModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -8,6 +8,8 @@ import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCheckboxModule } from "@angular/material/checkbox"; // Dodaj to
+import { MatIconModule } from "@angular/material/icon"; // Dodaj to
 
 import routeConfig from './app.routes';
 import { HttpClientModule } from "@angular/common/http";
@@ -21,11 +23,18 @@ import { EmailConfirmationComponent } from "./components/email-confirmation/emai
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
 import {RegisterComponent} from "./components/register/register.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatIcon} from "@angular/material/icon";
 import {BookDetailsComponent} from "./components/book-details/book-details.component";
 import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 import {AllBooksComponent} from "./components/all-books/all-books.component";
 import {RateComponent} from "./components/rate/rate.component";
+import {MatSliderModule} from "@angular/material/slider";
+import {UserPanelSmallComponent} from "./components/user-panel-small/user-panel-small.component";
+import {UserPanelComponent} from "./components/user-panel/user-panel.component";
+import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
+import {AddBookFormComponent} from "./components/add-book-form/add-book-form-component";
+import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AddReviewFormComponent} from "./components/add-review-form/add-review-form.component";
 
 @NgModule({
   declarations: [
@@ -38,15 +47,19 @@ import {RateComponent} from "./components/rate/rate.component";
     BookDetailsComponent,
     AuthorDetailsComponent,
     AllBooksComponent,
-    RateComponent
-
+    RateComponent,
+    UserPanelSmallComponent,
+    UserPanelComponent,
+    AddBookFormComponent,
+    AllAuthorsComponent,
+    AddAuthorFormComponent,
+    AddReviewFormComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routeConfig, { onSameUrlNavigation: 'reload' }),
+    RouterModule.forRoot(routeConfig, {onSameUrlNavigation: 'reload'}),
     MatProgressSpinnerModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     FormsModule,
     MatSelectModule,
     MatCardModule,
@@ -56,7 +69,12 @@ import {RateComponent} from "./components/rate/rate.component";
     NgxMatSelectSearchModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatIcon
+    MatIconModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
+    HammerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

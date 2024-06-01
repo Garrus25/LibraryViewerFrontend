@@ -12,14 +12,17 @@ import {Observable, of} from "rxjs";
 })
 export class MainComponent implements OnInit {
   books: BookDTO[] = [];
+  topRatedBooks: BookDTO[] = [];
   authors: AuthorDTO[] = [];
   bookCovers: Map<string, Blob> = new Map();
   authorPhotos: Map<string, Blob> = new Map();
 
-  constructor(private api: DefaultService, private router: Router, private sanitizer: DomSanitizer) { }
+  constructor(private api: DefaultService, private router: Router, private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.fetchTopRatedBooks();
     this.fetchAuthors();
   }
 
@@ -52,6 +55,22 @@ export class MainComponent implements OnInit {
       }
     });
   }
+
+  private fetchTopRatedBooks(): void {
+    this.api.getSpecifiedAmountOfBestRatedBooks(5).subscribe({
+      next: (books) => {
+        this.topRatedBooks = books;
+        console.log('Top rated books fetched:', this.topRatedBooks);
+        this.topRatedBooks.forEach(book => {
+          this.fetchBooksCover(book.coverName, book.isbn);
+        });
+      },
+      error: error => {
+        console.error('Error during fetching books:', error);
+      }
+    });
+  }
+
 
   private fetchAuthorPictures(pictureName?: string, id?: number): void {
     if (pictureName && id) {
