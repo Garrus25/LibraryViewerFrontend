@@ -12,6 +12,7 @@ import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
 import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
 import {AddBookFormComponent} from "./components/add-book-form/add-book-form-component";
+import {AddReviewFormComponent} from "./components/add-review-form/add-review-form.component";
 
 const routeConfig: Routes = [
   {
@@ -70,6 +71,11 @@ const routeConfig: Routes = [
     path: 'add-author-form',
     component: AddAuthorFormComponent,
     title: 'Add author form'
+  },
+  {
+    path: 'add-review-form/:title/:isbn',
+    component: AddReviewFormComponent,
+    title: 'Add review form'
   }
 ];
 

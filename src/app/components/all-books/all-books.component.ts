@@ -20,7 +20,9 @@ export class AllBooksComponent {
   public ratingFilter: number = 1;
   public ratingFilterEnabled: boolean = false;
 
-  constructor(private api: DefaultService, private sanitizer: DomSanitizer, private router: Router) { }
+  constructor(private api: DefaultService,
+              private sanitizer: DomSanitizer,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.fetchAllBooks();

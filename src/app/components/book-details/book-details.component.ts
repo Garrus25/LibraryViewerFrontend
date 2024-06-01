@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BookDTO, DefaultService, RateIdentityDTO} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
@@ -28,7 +28,8 @@ export class BookDetailsComponent {
   constructor(private route: ActivatedRoute,
               private api: DefaultService,
               private sanitizer: DomSanitizer,
-              private location: Location) { }
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit() {
     this.isbn = this.route.snapshot.paramMap.get('isbn');
@@ -97,6 +98,10 @@ export class BookDetailsComponent {
 
   goBack(): void {
     this.location.back();
+  }
+
+  navigateToAddReviewForm(): void {
+    this.router.navigate(['/add-review-form', this.bookDto?.isbn, this.bookDto?.title]);
   }
 
   protected readonly RateTypeEnum = RateTypeEnum;

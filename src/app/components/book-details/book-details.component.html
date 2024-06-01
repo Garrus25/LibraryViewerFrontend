@@ -18,6 +18,5 @@
       {{isDescriptionExpanded ? 'Zwiń opis' : 'Rozwiń opis'}}
     </button>
     <app-rate *ngIf="bookDto" [ratedObjectId]="bookDto.isbn" [rateType]="RateTypeEnum.Book" class="rate-component"></app-rate>
-    <button mat-raised-button color="primary" class="create-review-button">Utwórz recenzję</button>
-  </div>
+    <button mat-raised-button color="primary" (click)="navigateToAddReviewForm()" class="create-review-button">Utwórz recenzję</button>  </div>
 </mat-card>

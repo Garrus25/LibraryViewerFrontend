@@ -5,7 +5,7 @@
     <mat-label>Imię</mat-label>
     <input matInput formControlName="firstName">
     <mat-error *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
-      Proszę podać imię autora
+      Imie autora jest wymagane
     </mat-error>
   </mat-form-field>
 
@@ -13,7 +13,7 @@
     <mat-label>Nazwisko</mat-label>
     <input matInput formControlName="lastName">
     <mat-error *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
-      Proszę podać nazwisko autora
+      Nazwisko autora jest wymagane
     </mat-error>
   </mat-form-field>
 
@@ -21,7 +21,7 @@
     <mat-label>Opis</mat-label>
     <textarea matInput formControlName="description"></textarea>
     <mat-error *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
-      Proszę podać opis autora
+      Opis autora jest wymagany
     </mat-error>
   </mat-form-field>
   <h4>Wybierz zdjęcie w formacie jpg o rozmiarze 351x500 px.</h4>

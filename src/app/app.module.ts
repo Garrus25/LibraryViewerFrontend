@@ -34,6 +34,7 @@ import {AllAuthorsComponent} from "./components/all-authors/all-authors.componen
 import {AddBookFormComponent} from "./components/add-book-form/add-book-form-component";
 import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AddReviewFormComponent} from "./components/add-review-form/add-review-form.component";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     UserPanelComponent,
     AddBookFormComponent,
     AllAuthorsComponent,
-    AddAuthorFormComponent
+    AddAuthorFormComponent,
+    AddReviewFormComponent
   ],
   imports: [
     BrowserModule,
