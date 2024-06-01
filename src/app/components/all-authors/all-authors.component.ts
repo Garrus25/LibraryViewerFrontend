@@ -66,7 +66,7 @@ export class AllAuthorsComponent implements OnInit {
   }
 
   navigateToAddAuthor(): void {
-    this.router.navigate(['/add-author']);
+    this.router.navigate(['/add-author-form']);
   }
 
   goBack(): void {

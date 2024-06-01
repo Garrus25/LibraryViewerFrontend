@@ -9,8 +9,9 @@ import {BookDetailsComponent} from "./components/book-details/book-details.compo
 import {AuthorDetailsComponent} from "./components/author-details/author-details.component";
 import {AllBooksComponent} from "./components/all-books/all-books.component";
 import {UserPanelComponent} from "./components/user-panel/user-panel.component";
-import {AddBookFormComponent} from "./components/add-object-form/add-book-form-component";
 import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
+import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
+import {AddBookFormComponent} from "./components/add-book-form/add-book-form-component";
 
 const routeConfig: Routes = [
   {
@@ -56,14 +57,19 @@ const routeConfig: Routes = [
     title: 'User Panel'
   },
   {
-    path: 'add-object-form',
+    path: 'add-book-form',
     component: AddBookFormComponent,
-    title: 'Add object form'
+    title: 'Add book form'
   },
   {
     path: 'all-authors',
     component: AllAuthorsComponent,
     title: 'List of all authors'
+  },
+  {
+    path: 'add-author-form',
+    component: AddAuthorFormComponent,
+    title: 'Add author form'
   }
 ];
 
