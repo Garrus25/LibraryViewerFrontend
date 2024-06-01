@@ -25,6 +25,7 @@ export class AddBookFormComponent implements OnInit {
 
   onSubmit() {
     this.saveBookData()
+    this.selectedImage = null;
   }
 
   saveBookData(): void {
@@ -48,7 +49,7 @@ export class AddBookFormComponent implements OnInit {
       }
     });
 
-    this.api.uploadImage(this.form.value.image).subscribe({
+    this.api.uploadBookCover(this.form.value.image).subscribe({
       next: () => {
         console.log('Cover uploaded successfully');
         this.form.reset();
