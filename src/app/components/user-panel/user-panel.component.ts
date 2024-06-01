@@ -3,6 +3,7 @@ import {AuthorDTO, BookDTO, DefaultService, ReviewDTO, UserDTO} from "../../open
 import {Router} from "@angular/router";
 import {catchError, map, Observable, of} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user-panel',
@@ -19,7 +20,9 @@ export class UserPanelComponent {
 
   constructor(private api: DefaultService,
               private router: Router,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private snackBar: MatSnackBar
+  ) {
   }
 
   ngOnInit(): void {
@@ -44,6 +47,36 @@ export class UserPanelComponent {
     } else {
       console.error('User id is undefined');
     }
+  }
+
+   deleteBook(bookId: string): void {
+    this.api.deleteBookById(bookId).subscribe({
+      next: () => {
+        console.log('Book deleted successfully');
+        this.booksDto = this.booksDto.filter(book => book.isbn !== bookId);
+        this.snackBar.open('Książka została usunięta', '', {
+          duration: 3000,
+        });
+      },
+      error: error => {
+        console.error('Error during deleting book:', error);
+      }
+    });
+  }
+
+  deleteAuthor(authorId: number): void {
+    this.api.deleteAuthorById(authorId).subscribe({
+      next: () => {
+        console.log('Author deleted successfully');
+        this.authors = this.authors.filter(author => author.authorId !== authorId);
+        this.snackBar.open('Autor został usunięty', '', {
+          duration: 3000,
+        });
+      },
+      error: error => {
+        console.error('Error during deleting author:', error);
+      }
+    });
   }
 
   private fetchReviews(): void {

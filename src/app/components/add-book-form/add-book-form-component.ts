@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {BookDTO, DefaultService} from "../../openapi";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'add-book-form-component',
@@ -11,7 +12,10 @@ export class AddBookFormComponent implements OnInit {
   form!: FormGroup;
   selectedImage: string | ArrayBuffer | null = null;
 
-  constructor(private formBuilder: FormBuilder, private api: DefaultService,) { }
+  constructor(private formBuilder: FormBuilder,
+              private api: DefaultService,
+              private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -53,6 +57,9 @@ export class AddBookFormComponent implements OnInit {
       next: () => {
         console.log('Cover uploaded successfully');
         this.form.reset();
+        this.snackBar.open('Książka została dodana', '', {
+          duration: 3000,
+        });
       },
       error: error => {
         console.error('Could not fetch book:', error);
@@ -73,7 +80,7 @@ export class AddBookFormComponent implements OnInit {
         return;
       }
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = () => {
         this.selectedImage = reader.result;
         const img = new Image();
         img.src = reader.result as string;
@@ -93,7 +100,6 @@ export class AddBookFormComponent implements OnInit {
         image: file,
       });
 
-      // Przechwyć nazwę pliku
       this.form.patchValue({
         coverName: file.name
       });

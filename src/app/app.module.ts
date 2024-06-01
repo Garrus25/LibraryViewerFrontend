@@ -33,6 +33,7 @@ import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
 import {AddBookFormComponent} from "./components/add-book-form/add-book-form-component";
 import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {AddAuthorFormComponent} from "./components/add-author-form/add-author-fo
     MatCheckboxModule,
     MatSliderModule,
     BrowserAnimationsModule,
-    HammerModule
+    HammerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

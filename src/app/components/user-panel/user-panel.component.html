@@ -33,7 +33,7 @@
   <div *ngIf="booksDto.length === 0">
     <h2> Nie dodałeś jeszcze żadnej książki, możesz to zrobić klikając poniższy przycisk:</h2>
     <div class="center-button">
-      <button mat-raised-button color="primary" class="add-element-button">Dodaj książkę</button>
+      <button mat-raised-button color="primary" class="add-book-button" routerLink="/add-book-form">Dodaj nową książkę</button>
     </div>
   </div>
 
@@ -42,8 +42,7 @@
     <mat-card-title>{{book.title}}</mat-card-title>
     <div class="button-container">
       <button mat-raised-button color="primary" class="details-button" (click)="navigateToBookDetails(book.isbn)">Wyświetl szczegóły</button>
-      <button mat-raised-button class="delete-button">Usuń</button>
-    </div>
+      <button mat-raised-button class="delete-button" (click)="deleteBook(book.isbn!)">Usuń</button>    </div>
   </mat-card>
 </div>
 
@@ -56,8 +55,7 @@
     <img *ngIf="getAuthorPictureUrl(author.authorId?.toString()) | async as url" [src]="url" alt="author">    <mat-card-title>{{author.name}} {{author.surname}}</mat-card-title>
     <div class="button-container">
       <button mat-raised-button color="primary" class="details-button" (click)="navigateToAuthorDetails(author.authorId)">Wyświetl szczegóły</button>
-      <button mat-raised-button class="delete-button">Usuń</button>
-    </div>
+      <button mat-raised-button class="delete-button" (click)="deleteAuthor(author.authorId!)">Usuń</button>    </div>
   </mat-card>
 </div>
 

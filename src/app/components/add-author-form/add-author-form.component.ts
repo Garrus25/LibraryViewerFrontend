@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AuthorDTO, DefaultService} from "../../openapi";
 import {Location} from "@angular/common";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-author-form',
@@ -14,7 +15,8 @@ export class AddAuthorFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private api: DefaultService,
-              private location: Location) {
+              private location: Location,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -50,6 +52,9 @@ export class AddAuthorFormComponent implements OnInit {
       this.api.uploadAuthorPicture(this.form.value.image).subscribe({
         next: () => {
           console.log('Author image added successfully');
+          this.snackBar.open('Autor został dodany', '', {
+            duration: 3000,
+          });
         },
         error: error => {
           console.error('Could not add author:', error);
@@ -73,7 +78,7 @@ export class AddAuthorFormComponent implements OnInit {
         return;
       }
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = () => {
         this.selectedImage = reader.result;
         const img = new Image();
         img.src = reader.result as string;
