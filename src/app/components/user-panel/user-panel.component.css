@@ -154,11 +154,16 @@ h2 {
   display: block;
   margin: auto;
   width: 30%;
-  margin-left: -50px; /* Dodajemy negatywny margines */
+  margin-left: -50px;
 
 }
 
 .button-container-review {
   display: flex;
   justify-content: space-around;
+}
+
+.your-reviews-header {
+  text-align: center;
+  margin: 30px;
 }
