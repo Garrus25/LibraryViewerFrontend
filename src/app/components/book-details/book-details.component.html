@@ -20,3 +20,16 @@
     <app-rate *ngIf="bookDto" [ratedObjectId]="bookDto.isbn" [rateType]="RateTypeEnum.Book" class="rate-component"></app-rate>
     <button mat-raised-button color="primary" (click)="navigateToAddReviewForm()" class="create-review-button">Utwórz recenzję</button>  </div>
 </mat-card>
+
+<h1> Recenzje:</h1>
+
+<div *ngIf="reviews.length === 0" class="no-reviews-message">
+  <h2>Ta książka nie ma jeszcze żadnych recenzji. Możesz ją dodać klikając w znajdujący się powyżej przycisk Utwórz recenzję. </h2>
+</div>
+
+<div class="book-reviews">
+  <div *ngFor="let review of reviews" class="review-card">
+    <p class="review-title">Tytuł recenzji: {{review.title}}</p>
+    <p class="review-excerpt">{{review.content}}</p>
+  </div>
+</div>

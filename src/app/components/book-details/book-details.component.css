@@ -71,5 +71,76 @@ p {
   margin-top: 30px;
 }
 
+.book-details {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f0f0;
+  margin: 50px auto 0;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  text-align: center;
+}
 
+.book-details h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
 
+.book-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 10%;
+}
+
+.review-card {
+  width: calc(48% - 60px);
+  margin-bottom: 2%;
+  margin-right: 30px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-title {
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+
+.edit-button {
+  margin-top: auto;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.your-reviews-header {
+  text-align: center;
+  margin: 30px;
+}
+
+.centered-title {
+  text-align: center;
+}
+
+.book-reviews {
+  margin-top: 40px;
+}
+
+h2, h1{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.review-title {
+  font-size: 1.5em;
+}
