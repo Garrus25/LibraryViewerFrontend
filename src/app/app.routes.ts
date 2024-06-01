@@ -10,6 +10,7 @@ import {AuthorDetailsComponent} from "./components/author-details/author-details
 import {AllBooksComponent} from "./components/all-books/all-books.component";
 import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 import {AddBookFormComponent} from "./components/add-object-form/add-book-form-component";
+import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
 
 const routeConfig: Routes = [
   {
@@ -58,9 +59,12 @@ const routeConfig: Routes = [
     path: 'add-object-form',
     component: AddBookFormComponent,
     title: 'Add object form'
+  },
+  {
+    path: 'all-authors',
+    component: AllAuthorsComponent,
+    title: 'List of all authors'
   }
-
-
 ];
 
 export default routeConfig;

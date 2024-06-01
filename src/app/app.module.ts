@@ -31,6 +31,7 @@ import {MatSliderModule} from "@angular/material/slider";
 import {UserPanelSmallComponent} from "./components/user-panel-small/user-panel-small.component";
 import {UserPanelComponent} from "./components/user-panel/user-panel.component";
 import {AddBookFormComponent} from "./components/add-object-form/add-book-form-component";
+import {AllAuthorsComponent} from "./components/all-authors/all-authors.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {AddBookFormComponent} from "./components/add-object-form/add-book-form-c
     RateComponent,
     UserPanelSmallComponent,
     UserPanelComponent,
-    AddBookFormComponent
+    AddBookFormComponent,
+    AllAuthorsComponent
   ],
   imports: [
     BrowserModule,
