@@ -73,7 +73,12 @@ const routeConfig: Routes = [
     title: 'Add author form'
   },
   {
-    path: 'add-review-form/:title/:isbn',
+    path: 'add-review-form/:isbn/:title',
+    component: AddReviewFormComponent,
+    title: 'Add review form'
+  },
+  {
+    path: 'add-review-form/:reviewId',
     component: AddReviewFormComponent,
     title: 'Add review form'
   }

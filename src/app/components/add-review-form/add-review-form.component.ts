@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from "@angular/common";
 import {DefaultService, ReviewDTO} from "../../openapi";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -13,6 +13,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AddReviewFormComponent implements OnInit {
   reviewForm: FormGroup;
   bookTitle: string | null = null;
+  bookId: string | null = null;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -26,14 +27,34 @@ export class AddReviewFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookTitle = this.route.snapshot.paramMap.get('isbn');
+    this.bookTitle = this.route.snapshot.paramMap.get('title');
+
+    let bookId = "";
+
+    const reviewId = this.route.snapshot.paramMap.get('reviewId');
+    const isbn = this.route.snapshot.paramMap.get('isbn');
+
+    if (reviewId && !isbn) {
+      this.api.getReviewById(Number(reviewId)).subscribe(review => {
+        this.reviewForm.patchValue({
+          title: review.title,
+          content: review.content
+        });
+        this.bookId = review.bookId!;
+        this.api.getBookById(review.bookId!).subscribe(book => {
+          this.bookTitle = book.title!;
+        });
+      });
+    } else {
+      this.bookTitle = "";
+    }
   }
 
   onSubmit(): void {
     if (this.reviewForm.valid) {
-      console.log(this.reviewForm.value);
+      this.saveReview();
     }
-    this.saveReview();
+    this.reviewForm.reset();
   }
 
   private saveReview(): void {
@@ -41,7 +62,8 @@ export class AddReviewFormComponent implements OnInit {
       title: this.reviewForm.get('title')?.value,
       content: this.reviewForm.get('content')?.value,
       createdBy: sessionStorage.getItem('id') || '',
-      bookId: this.route.snapshot.paramMap.get('title')!
+      bookId: this.route.snapshot.paramMap.get('isbn')!,
+      reviewId: Number(this.route.snapshot.paramMap.get('reviewId')) || 0
     }
 
     this.api.addReview(review).subscribe({
