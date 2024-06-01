@@ -31,3 +31,7 @@ mat-form-field {
   right: 10px;
   cursor: pointer;
 }
+
+.uploaded-file {
+  margin: 10px 0;  /* Dostosuj wartości według potrzeb */
+}

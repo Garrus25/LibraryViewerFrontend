@@ -30,7 +30,7 @@ import {RateComponent} from "./components/rate/rate.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {UserPanelSmallComponent} from "./components/user-panel-small/user-panel-small.component";
 import {UserPanelComponent} from "./components/user-panel/user-panel.component";
-import {AddObjectFormComponent} from "./components/add-object-form/add-object-form.component";
+import {AddBookFormComponent} from "./components/add-object-form/add-book-form-component";
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import {AddObjectFormComponent} from "./components/add-object-form/add-object-fo
     RateComponent,
     UserPanelSmallComponent,
     UserPanelComponent,
-    AddObjectFormComponent
+    AddBookFormComponent
   ],
   imports: [
     BrowserModule,
