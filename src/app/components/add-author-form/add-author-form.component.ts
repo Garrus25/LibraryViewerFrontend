@@ -33,8 +33,9 @@ export class AddAuthorFormComponent implements OnInit {
         name: this.form.get('firstName')?.value,
         surname: this.form.get('lastName')?.value,
         description: this.form.get('description')?.value,
-        pictureName: this.form.value.coverName ,
-        createdBy: sessionStorage.getItem('id') || ''
+        pictureName: this.form.value.authorPictureName ,
+        createdBy: sessionStorage.getItem('id') || '',
+        additionDate: new Date().toISOString().split('T')[0],
       }
 
       this.api.addAuthor(author).subscribe({
@@ -93,7 +94,7 @@ export class AddAuthorFormComponent implements OnInit {
       });
 
       this.form.patchValue({
-        coverName: file.name
+        authorPictureName: file.name
       });
       console.log('Cover name:', file.name);
     }
