@@ -18,6 +18,8 @@ export class UserPanelComponent {
   authors: AuthorDTO[] = [];
   reviews: ReviewDTO[] = [];
 
+  private bookTitles: Map<string, string> = new Map();
+
   constructor(private api: DefaultService,
               private router: Router,
               private sanitizer: DomSanitizer,
@@ -93,6 +95,24 @@ export class UserPanelComponent {
       });
     } else {
       console.error('User id is undefined');
+    }
+  }
+
+  getBookNameByBookId(isbn: string): Observable<string> {
+    if (this.bookTitles.has(isbn)) {
+      return of(this.bookTitles.get(isbn) || '');
+    } else {
+      return this.api.getBookById(isbn).pipe(
+        map(bookDto => {
+          const title = bookDto.title || '';
+          this.bookTitles.set(isbn, title);
+          return title;
+        }),
+        catchError(error => {
+          console.error('Error during fetching books:', error);
+          return of('');
+        })
+      );
     }
   }
 
