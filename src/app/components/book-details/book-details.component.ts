@@ -1,4 +1,4 @@
-import {Component, Injectable} from '@angular/core';
+import {Component, EventEmitter, Injectable, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {BookDTO, DefaultService, RateIdentityDTO, ReviewDTO} from "../../openapi";
 import {Observable, of, tap} from "rxjs";
@@ -21,7 +21,6 @@ export class BookDetailsComponent {
   isDescriptionExpanded = false;
   shortDescriptionLimit = 100;
   reviews: ReviewDTO[] = [];
-
 
   isDescriptionLongerThanLimit(): boolean {
     return !!(this.bookDto?.description && this.bookDto.description.length > this.shortDescriptionLimit);  }

@@ -1,0 +1,21 @@
+<div class="comments">
+  <h3 class="comments-title">Sekcja komentarzy</h3>
+  <app-comment-form
+    submitLabel="Dodaj komentarz"
+    (handleSubmit)="addComment({text: $event, parentId: null})"
+  >
+  </app-comment-form>
+  <div class="comments-container">
+    <app-comment
+      *ngFor="let comment of comments"
+      [comment]="comment"
+      [currentUserId]="currentUserId!"
+      [replies]="getReplies(comment.commentId!)"
+      (setActiveComment)="setActiveComment($event)"
+      (addComment)="addComment($event)"
+    >
+    </app-comment>
+  </div>
+</div>
+
+
