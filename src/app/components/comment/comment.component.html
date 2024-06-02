@@ -8,7 +8,6 @@
       <div>{{ createdAt }}</div>
     </div>
     <div class="comment-text">{{ comment.body }}</div>
-    COMMENT FORM EDITING
     <div class="comment-actions">
       <div
         *ngIf="canReply"
@@ -34,7 +33,11 @@
       >
         Edit
       </div>
-      COMMENT FORM REPLYING & REPLIES
     </div>
+    <app-comment-form class = "comment-form"
+      *ngIf="isReplying()"
+      submitLabel="Reply"
+      (handleSubmit)="addComment.emit({ text: $event, parentId: replyId })"
+    ></app-comment-form>
   </div>
 </div>

@@ -144,3 +144,8 @@ h2, h1{
 .review-title {
   font-size: 1.5em;
 }
+
+.comments-width {
+  width: 70%;
+  margin: 0 auto;
+}

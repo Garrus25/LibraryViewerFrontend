@@ -1,8 +1,7 @@
 <div class="comments">
-  <h3 class="comments-title">Comments</h3>
-  <div class="comment-form-title">Write comment</div>
+  <h3 class="comments-title">Sekcja komentarzy</h3>
   <app-comment-form
-    submitLabel="Write"
+    submitLabel="Dodaj komentarz"
     (handleSubmit)="addComment({text: $event, parentId: null})"
   >
   </app-comment-form>

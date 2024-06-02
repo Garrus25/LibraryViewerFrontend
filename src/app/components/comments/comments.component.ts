@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {CommentDTO, DefaultService} from "../../openapi";
 import {ActiveCommentInterface} from "../../interfaces/activeComment.interface";
 
@@ -12,7 +12,8 @@ export class CommentsComponent implements OnInit {
   public comments: CommentDTO[] = [];
   activeComment: ActiveCommentInterface | null = null;
 
-  constructor(private api: DefaultService) {
+  constructor(private api: DefaultService,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class CommentsComponent implements OnInit {
         console.info("Comments fetched successfully")
         this.comments = comments;
         console.log(comments)
+        this.cdr.detectChanges(); // Trigger change detection
       },
       error: error => {
         console.error('Error during fetching all comments:', error);
@@ -63,6 +65,7 @@ export class CommentsComponent implements OnInit {
     this.api.addComment(comment).subscribe({
       next: () => {
         console.log('Comment added successfully');
+        this.fetchCommentData();
       },
       error: error => {
         console.error('Could not save comment:', error);
