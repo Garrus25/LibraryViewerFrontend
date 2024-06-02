@@ -12,6 +12,7 @@
       [comment]="comment"
       [currentUserId]="currentUserId!"
       [replies]="getReplies(comment.commentId!)"
+      (setActiveComment)="setActiveComment($event)"
     >
     </app-comment>
   </div>

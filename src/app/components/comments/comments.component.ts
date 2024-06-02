@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommentDTO, DefaultService} from "../../openapi";
+import {ActiveCommentInterface} from "../../interfaces/activeComment.interface";
 
 @Component({
   selector: 'app-comments',
@@ -8,8 +9,8 @@ import {CommentDTO, DefaultService} from "../../openapi";
 })
 export class CommentsComponent implements OnInit {
   @Input() currentUserId: string | undefined;
-
   public comments: CommentDTO[] = [];
+  activeComment: ActiveCommentInterface | null = null;
 
   constructor(private api: DefaultService) {
   }
@@ -67,6 +68,10 @@ export class CommentsComponent implements OnInit {
         console.error('Could not save comment:', error);
       }
     });
+  }
+
+  setActiveComment(activeComment: ActiveCommentInterface | null): void {
+    this.activeComment = activeComment;
   }
 }
 

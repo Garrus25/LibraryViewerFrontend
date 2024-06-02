@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommentDTO} from "../../openapi";
+import {ActiveCommentInterface} from "../../interfaces/activeComment.interface";
+import {ActiveCommentTypeEnum} from "../../interfaces/activeCommentType.enum";
 
 @Component({
   selector: 'app-comment',
@@ -10,25 +12,21 @@ export class CommentComponent {
   @Input() comment!: CommentDTO;
   @Input() currentUserId!: string;
   @Input() replies!: CommentDTO[]
+  @Output()
+  setActiveComment = new EventEmitter<ActiveCommentInterface | null>();
+  activeCommentType = ActiveCommentTypeEnum;
 
   createdAt: string = '';
   canReply: boolean = false;
-  canEdit: boolean = false;
+  canEdit: boolean = true;
   canDelete: boolean = false;
 
   ngOnInit(): void {
-    const fiveMinutes = 300000;
     if (this.comment.createdAt) {
-      const timePassed =
-        new Date().getMilliseconds() -
-        new Date(this.comment.createdAt).getMilliseconds() >
-        fiveMinutes;
       this.canReply = Boolean(this.currentUserId);
-      this.canEdit = this.currentUserId === this.comment.userId && !timePassed;
       this.canDelete =
         this.currentUserId === this.comment.userId &&
-        this.replies.length === 0 &&
-        !timePassed;
+        this.replies.length === 0;
     }
   }
 }

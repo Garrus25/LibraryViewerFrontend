@@ -1,6 +1,6 @@
 <div class="comment">
   <div class="comment-image-container">
-    <img src="/assets/user-icon.png" />
+    <img src="/assets/user-icon.png" alt =""/>
   </div>
   <div class="comment-right-part">
     <div class="comment-content">
@@ -13,22 +13,28 @@
       <div
         *ngIf="canReply"
         class="comment-action"
+        (click)="
+      setActiveComment.emit({
+        id: comment.commentId!,
+        type: activeCommentType.replying
+      })
+    "
       >
         Reply
       </div>
       <div
         *ngIf="canEdit"
         class="comment-action"
+        (click)="
+      setActiveComment.emit({
+        id: comment.commentId!,
+        type: activeCommentType.editing
+      })
+    "
       >
         Edit
       </div>
-      <div
-        *ngIf="canDelete"
-        class="comment-action"
-      >
-        Delete
-      </div>
+      COMMENT FORM REPLYING & REPLIES
     </div>
-    COMMENT FORM REPLYING & REPLIES
   </div>
 </div>
