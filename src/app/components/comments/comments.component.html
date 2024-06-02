@@ -1,7 +1,11 @@
 <div class="comments">
   <h3 class="comments-title">Comments</h3>
   <div class="comment-form-title">Write comment</div>
-  COMMENT FORM
+  <app-comment-form
+    submitLabel="Write"
+    (handleSubmit)="addComment({text: $event, parentId: null})"
+  >
+  </app-comment-form>
   <div class="comments-container">
     <app-comment
       *ngFor="let comment of comments"
@@ -12,3 +16,5 @@
     </app-comment>
   </div>
 </div>
+
+

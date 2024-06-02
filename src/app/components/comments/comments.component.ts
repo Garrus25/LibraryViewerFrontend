@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommentDTO, DefaultService} from "../../openapi";
 
 @Component({
@@ -6,12 +6,13 @@ import {CommentDTO, DefaultService} from "../../openapi";
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css'
 })
-export class CommentsComponent {
+export class CommentsComponent implements OnInit {
   @Input() currentUserId: string | undefined;
 
   public comments: CommentDTO[] = [];
 
-  constructor(private api: DefaultService) { }
+  constructor(private api: DefaultService) {
+  }
 
   ngOnInit(): void {
     this.fetchCommentData();
@@ -41,4 +42,31 @@ export class CommentsComponent {
         }
       );
   }
+
+  addComment({
+               text,
+               parentId,
+             }: {
+    text: string;
+    parentId: string | null;
+  }): void {
+    let comment: CommentDTO = {
+      userId: sessionStorage.getItem('id') || '',
+      createdAt: new Date().toISOString(),
+      body: text,
+      username: sessionStorage.getItem('username') || '',
+    };
+
+    console.log(comment)
+
+    this.api.addComment(comment).subscribe({
+      next: () => {
+        console.log('Comment added successfully');
+      },
+      error: error => {
+        console.error('Could not save comment:', error);
+      }
+    });
+  }
 }
+
