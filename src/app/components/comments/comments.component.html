@@ -1,0 +1,14 @@
+<div class="comments">
+  <h3 class="comments-title">Comments</h3>
+  <div class="comment-form-title">Write comment</div>
+  COMMENT FORM
+  <div class="comments-container">
+    <app-comment
+      *ngFor="let comment of comments"
+      [comment]="comment"
+      [currentUserId]="currentUserId!"
+      [replies]="getReplies(comment.commentId!)"
+    >
+    </app-comment>
+  </div>
+</div>
