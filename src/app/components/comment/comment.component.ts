@@ -22,7 +22,6 @@ export class CommentComponent implements OnInit{
 
   createdAt: string = '';
   canReply: boolean = false;
-  canEdit: boolean = true;
   canDelete: boolean = false;
   activeComment: ActiveCommentInterface | null = null;
 
@@ -38,8 +37,10 @@ export class CommentComponent implements OnInit{
 
   isReplying(): boolean {
     if (!this.activeComment) {
+      console.log('No active comment')
       return false;
     }
+    console.log('Active comment:', this.activeComment);
     return (
       this.activeComment.id === this.comment.commentId &&
       this.activeComment.type === this.activeCommentType.replying

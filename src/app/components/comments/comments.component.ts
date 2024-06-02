@@ -9,6 +9,7 @@ import {ActiveCommentInterface} from "../../interfaces/activeComment.interface";
 })
 export class CommentsComponent implements OnInit {
   @Input() currentUserId: string | undefined;
+  @Input() bookId: string | undefined;
   public comments: CommentDTO[] = [];
   activeComment: ActiveCommentInterface | null = null;
 
@@ -21,12 +22,12 @@ export class CommentsComponent implements OnInit {
   }
 
   private fetchCommentData(): void {
-    this.api.getAllComments().subscribe({
+    this.api.getAllCommentsForSpecificBook(this.bookId!).subscribe({
       next: (comments) => {
         console.info("Comments fetched successfully")
         this.comments = comments;
         console.log(comments)
-        this.cdr.detectChanges(); // Trigger change detection
+        this.cdr.detectChanges();
       },
       error: error => {
         console.error('Error during fetching all comments:', error);
@@ -51,13 +52,14 @@ export class CommentsComponent implements OnInit {
                parentId,
              }: {
     text: string;
-    parentId: string | null;
+    parentId: number | null;
   }): void {
     let comment: CommentDTO = {
       userId: sessionStorage.getItem('id') || '',
       createdAt: new Date().toISOString(),
       body: text,
       username: sessionStorage.getItem('username') || '',
+      bookId: this.bookId!
     };
 
     console.log(comment)

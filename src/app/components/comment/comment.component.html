@@ -10,7 +10,6 @@
     <div class="comment-text">{{ comment.body }}</div>
     <div class="comment-actions">
       <div
-        *ngIf="canReply"
         class="comment-action"
         (click)="
       setActiveComment.emit({
@@ -19,10 +18,9 @@
       })
     "
       >
-        Reply
+        Dodaj odpowiedź
       </div>
       <div
-        *ngIf="canEdit"
         class="comment-action"
         (click)="
       setActiveComment.emit({
@@ -31,7 +29,6 @@
       })
     "
       >
-        Edit
       </div>
     </div>
     <app-comment-form class = "comment-form"

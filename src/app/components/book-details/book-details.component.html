@@ -32,5 +32,4 @@
     <p class="review-title">Tytuł recenzji: {{review.title}}</p>
     <p class="review-excerpt">{{review.content}}</p>
   </div>
-  <app-comments currentUserId="1" class="comments-width"></app-comments>
-</div>
+  <app-comments *ngIf="bookDto" currentUserId="1" [bookId]="bookDto.isbn" class="comments-width"></app-comments></div>
