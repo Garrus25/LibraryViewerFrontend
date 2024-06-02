@@ -35,6 +35,9 @@ import {AddBookFormComponent} from "./components/add-book-form/add-book-form-com
 import {AddAuthorFormComponent} from "./components/add-author-form/add-author-form.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AddReviewFormComponent} from "./components/add-review-form/add-review-form.component";
+import {CommentComponent} from "./comment/comment.component";
+import {CommentsComponent} from "./comments/comments.component";
+import {CommentFormComponent} from "./comment-form/comment-form.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import {AddReviewFormComponent} from "./components/add-review-form/add-review-fo
     AddBookFormComponent,
     AllAuthorsComponent,
     AddAuthorFormComponent,
-    AddReviewFormComponent
+    AddReviewFormComponent,
+    CommentComponent,
+    CommentsComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,
